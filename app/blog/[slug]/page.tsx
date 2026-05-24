@@ -5,7 +5,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { blogs } from "@/public/datas/blogs";
-import BlogSidebar from "@/components/blog/Sidebar";
 
 export default function BlogDetailsPage() {
   const params = useParams();
@@ -34,7 +33,7 @@ export default function BlogDetailsPage() {
           
           {/* Sidebar - Desktop Left, Mobile Bottom */}
           <div className="w-full lg:w-1/4 order-2 lg:order-1 ">
-            <BlogSidebar />
+            
           </div>
 
           {/* Main Content */}

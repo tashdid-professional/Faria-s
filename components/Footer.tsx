@@ -1,14 +1,15 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { footerData } from "@/public/datas/homepage";
 
 export default function Footer() {
   const { contact, socials, center, newsletter } = footerData;
 
   return (
-    <footer className="bg-[#FCF7EE] pt-20 lg:pb-10 px-6 lg:px-24">
-      <div className="max-w-7xl mx-auto">
+    <footer className="bg-[#FCF7EE] pt-20 lg:pb-10 ">
+      <div className="l container ">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center md:text-left items-start">
           
           {/* Contact Column */}
@@ -25,7 +26,7 @@ export default function Footer() {
               </div>
               <div className="flex items-start justify-center md:justify-start space-x-3">
                 <svg className="w-4 h-4 mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                <span className="max-w-[200px] leading-relaxed">{contact.address}</span>
+                <span className="max-w-50 leading-relaxed">{contact.address}</span>
               </div>
             </div>
 
@@ -53,7 +54,14 @@ export default function Footer() {
 
           {/* Center Column */}
           <div className="flex flex-col items-center">
-            <h2 className="text-4xl font-outfit font-medium text-black tracking-widest mb-6">{center.logo}</h2>
+            <Link href="/" className="relative w-48 h-22 block mb-6">
+              <Image 
+                src="/images/logo.png" 
+                alt="LILAC" 
+                fill 
+                className="object-contain"
+              />
+            </Link>
             <p className=" font-lato text-sm lg:text-base text-center max-w-sm leading-relaxed mb-8">
               {center.description}
             </p>

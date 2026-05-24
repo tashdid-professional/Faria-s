@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { navLinks } from "@/public/datas/homepage";
+import Image from "next/image";
+import { navLinks, socialLinks } from "@/public/datas/homepage";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -23,13 +24,22 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`fixed top-0 left-0 w-full z-50 flex items-center justify-between px-6 lg:px-12 transition-all duration-300 ${
-        isScrolled ? "bg-[#FCF7EE]/90  lg:py-6 py-4 shadow-sm" : "bg-transparent py-6"
+      className={`fixed top-0 left-0 w-full z-50 flex container items-center justify-between  transition-all duration-300 ${
+        isScrolled ? "bg-[#FCF7EE]/90  lg:py-2 py-4 shadow-sm" : "bg-transparent py-6 container"
       }`}
     >
+      
       {/* Logo */}
-      <div className="text-2xl font-bold tracking-widest text-black">
-        <Link href="/">LILAC</Link>
+      <div className="flex items-center">
+        <Link href="/" className="relative w-20 md:h-16 h-12 block">
+          <Image 
+            src="/images/logo.png" 
+            alt="LILAC" 
+            fill 
+            className="object-contain"
+            priority
+          />
+        </Link>
       </div>
 
       {/* Desktop Links */}
@@ -38,7 +48,7 @@ export default function Navbar() {
           <Link
             key={link.name}
             href={link.href}
-            className="text-[12px] font-medium tracking-[2.3px] text-black hover:text-[#b6713e] transition-opacity font-lato"
+            className="text-[12px] font-medium tracking-[2.3px] text-black hover:text-[#b6713e] transition-opacity font-lato "
           >
             {link.name.toUpperCase()}
           </Link>
@@ -101,7 +111,7 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       <div
-        className={`fixed inset-0 bg-[#FCF7EE] z-[60] flex flex-col items-center justify-center space-y-8 transition-transform duration-500 ease-in-out md:hidden ${
+        className={`fixed inset-0 bg-[#FCF7EE] z-60 flex flex-col items-center justify-center space-y-8 transition-transform duration-500 ease-in-out md:hidden ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
@@ -142,17 +152,18 @@ export default function Navbar() {
         <div className={`flex space-x-6 pt-8 transition-all duration-700 delay-500 ${
           isOpen ? "opacity-100" : "opacity-0"
         }`}>
-          <div className="w-10 h-10 rounded-full border border-black/10 flex items-center justify-center">
+          <Link href={socialLinks.facebook} target="_blank" className="w-10 h-10 rounded-full border border-black/10 flex items-center justify-center hover:bg-black hover:text-white transition-colors">
             <span className="text-[10px] font-bold">FB</span>
-          </div>
-          <div className="w-10 h-10 rounded-full border border-black/10 flex items-center justify-center">
+          </Link>
+          <Link href={socialLinks.instagram} target="_blank" className="w-10 h-10 rounded-full border border-black/10 flex items-center justify-center hover:bg-black hover:text-white transition-colors">
             <span className="text-[10px] font-bold">IG</span>
-          </div>
-          <div className="w-10 h-10 rounded-full border border-black/10 flex items-center justify-center">
+          </Link>
+          <Link href={socialLinks.tiktok} target="_blank" className="w-10 h-10 rounded-full border border-black/10 flex items-center justify-center hover:bg-black hover:text-white transition-colors">
             <span className="text-[10px] font-bold">TK</span>
-          </div>
+          </Link>
         </div>
       </div>
+      
     </nav>
   );
 }

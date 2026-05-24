@@ -69,7 +69,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             <div className="absolute top-4 right-4 translate-x-4 opacity-0 group-hover/image:translate-x-0 group-hover/image:opacity-100 transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] z-20 hidden md:block">
               <button
                 onClick={openQuickView}
-                className="w-10 h-10 bg-white flex items-center justify-center text-black shadow-sm hover:bg-black hover:text-white transition-all duration-300 border border-neutral-100 "
+                className="w-10 h-10 bg-[#F2E9D4] flex items-center justify-center text-black shadow-sm hover:bg-black hover:text-white transition-all duration-300   rounded-full"
                 title="Quick View"
               >
                 <Eye size={18} />
@@ -89,20 +89,18 @@ export default function ProductCard({ product }: ProductCardProps) {
           </div>
 
           {/* Content */}
-          <div className="space-y-1.5 px-1">
-            <p className="text-[10px] font-medium tracking-[0.1em] text-[#ef4626] uppercase">
-              {product.category}
-            </p>
-            <h3 className="text-[14px] font-semibold text-black leading-tight group-hover:text-black/70 transition-colors">
+          <div className="space-y-1.5 px-1 text-center">
+            
+            <h3 className="text-[16px] font-medium text-black leading-tight group-hover:text-black/70 transition-colors font-outfit">
               {product.name}
             </h3>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 justify-center">
               {product.oldPrice && (
-                <span className="text-[14px] text-gray-400 line-through decoration-black/20">
+                <span className="font-lato text-[14px] text-gray-400 line-through decoration-black/20">
                   £{product.oldPrice.toFixed(2)}
                 </span>
               )}
-              <span className="text-[14px] text-black">
+              <span className="text-[14px] font-lato text-black">
                 £{product.price.toFixed(2)}
               </span>
             </div>

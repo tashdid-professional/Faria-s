@@ -4,8 +4,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import Navbar from "@/components/layout/navbar";
-import Footer from "@/components/layout/footer";
+
 import ProductCard from "@/components/ProductCard";
 import { products } from "@/public/datas/products";
 import { shopHeader } from "@/public/datas/homepage";

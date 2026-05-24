@@ -1,108 +1,70 @@
 "use client";
 
+import { useState, useMemo } from "react";
+import Image from "next/image";
+import Link from "next/link";
 import { products } from "@/public/datas/products";
 import ProductCard from "./ProductCard";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import { useState, useEffect } from "react";
-import Link from "next/link";
 
-export default function FeaturedProducts() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  
-  // Responsive items per page
-  const [itemsPerPage, setItemsPerPage] = useState(4);
+// Helper to fix image paths if they point to old folder
+const fixImagePath = (src: string) => {
+  if (src.startsWith('/Images')) return src.replace('/Images', '/images');
+  return src;
+};
 
-  // Update items per page based on screen size
-  useEffect(() => {
-    const updateItemsPerPage = () => {
-      if (window.innerWidth < 640) {
-        setItemsPerPage(1);
-      } else if (window.innerWidth < 1024) {
-        setItemsPerPage(2);
-      } else {
-        setItemsPerPage(4);
-      }
-    };
-
-    updateItemsPerPage();
-    window.addEventListener("resize", updateItemsPerPage);
-    return () => window.removeEventListener("resize", updateItemsPerPage);
+export default function FeaturedProductsSection() {
+  // Get unique categories and add "All" at the beginning
+  const categories = useMemo(() => {
+    const unique = Array.from(new Set(products.map((p) => p.category)));
+    return unique.length > 0 ? unique : ["Uncategorized"];
   }, []);
 
-  // Auto-slide on mobile only
-  useEffect(() => {
-    if (itemsPerPage !== 1) return;
+  const [activeCategory, setActiveCategory] = useState(categories[0]);
 
-    const timer = setInterval(() => {
-      nextSlide();
-    }, 4000); // Slide every 4 seconds
-
-    return () => clearInterval(timer);
-  }, [itemsPerPage]);
-  
-  // Clone products for loop
-  const extendedProducts = [
-    ...products.slice(-itemsPerPage),
-    ...products,
-    ...products.slice(0, itemsPerPage),
-  ];
-
-  const nextSlide = () => {
-    setCurrentIndex((prev) => (prev + 1) % products.length);
-  };
-
-  const prevSlide = () => {
-    setCurrentIndex((prev) => (prev - 1 + products.length) % products.length);
-  };
+  const filteredProducts = useMemo(() => {
+    return products.filter((p) => p.category === activeCategory).slice(0, 4);
+  }, [activeCategory]);
 
   return (
-    <section id="featured-products" className="py-16 md:py-24 bg-white  relative font-sans container">
-      {/* Section Header */}
-      <div className ="">
-      <div className="flex justify-between items-center mb-8  ">
-        <h2 className="text-xl md:text-[16px] font-medium text-[16px] text-black tracking-tight">
-          Best Seller Products
-        </h2>
-        <Link 
-          href="/shop" 
-          className="flex items-center gap-2 lg:text-[12px] font-semibold text-black hover:opacity-60 transition-opacity  tracking-wider text-[8px]"
-        >
-          View All Products <ChevronRight size={16} />
-        </Link>
-      </div>
-
-      {/* Products Slider Container */}
-      <div className="relative group">
-        <div className="relative">
-          <div className="overflow-hidden mx-[-12px]"> {/* Added negative margin to match px-3 */}
-            <div
-              className="flex transition-transform duration-500 ease-out"
-              style={{
-                transform: `translateX(-${(currentIndex + itemsPerPage) * (100 / itemsPerPage)}%)`,
-              }}
-            >
-              {extendedProducts.map((product, index) => (
-                <div key={`${product.id}-${index}`} className="w-full sm:w-1/2 lg:w-1/4 shrink-0 px-3">
-                  <ProductCard product={product} />
-                </div>
-              ))}
-            </div>
-          </div>
+    <section className="py-24  bg-[#F2E9D4]">
+      <div className="container">
+        {/* Header */}
+        <div className="text-center mb-12">
+          <p className="text-[16px] tracking-[0.23em] text-[#202020] mb-2 font-lato uppercase">
+            PREMIUM BRANDS
+          </p>
+          <h2 className="text-4xl lg:text-[43px] font-medium font-outfit text-black mb-12">
+            Featured Products
+          </h2>
         </div>
 
-          {/* Carousel Arrows */}
-          <button
-            onClick={prevSlide}
-            className="absolute -left-4 md:-left-12 lg:-left-20 top-[40%] md:top-[35%] -translate-y-1/2 text-black/20 hover:text-black transition-colors z-20"
-          >
-            <ChevronLeft size={60} strokeWidth={0.5} />
-          </button>
-          <button
-            onClick={nextSlide}
-            className="absolute -right-4 md:-right-12 lg:-right-20 top-[40%] md:top-[35%] -translate-y-1/2 text-black/20 hover:text-black transition-colors z-20"
-          >
-            <ChevronRight size={60} strokeWidth={0.5} />
-          </button>
+        {/* Category Tabs */}
+        <div className="flex flex-wrap justify-center gap-4 mb-16">
+          {categories.map((cat) => (
+            <button
+              key={cat}
+              onClick={() => setActiveCategory(cat)}
+              className={`px-8 py-3 text-[13px] font-bold uppercase tracking-widest transition-all duration-300 border flex items-center gap-2 ${
+                activeCategory === cat
+                  ? "bg-black border-black text-white"
+                  : "bg-white border-white text-black hover:border-black/10"
+              } shadow-sm`}
+            >
+              {activeCategory === cat && (
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="animate-pulse">
+                  <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
+                </svg>
+              )}
+              {cat}
+            </button>
+          ))}
+        </div>
+
+        {/* Products Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          {filteredProducts.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
         </div>
       </div>
     </section>

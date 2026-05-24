@@ -5,8 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { Search, ChevronRight, ChevronLeft } from "lucide-react";
 import { blogs } from "@/public/datas/blogs";
-import { socialLinks } from "@/public/datas/homepage";
-import BlogSidebar from "@/components/blog/Sidebar";
+import BlogSidebar from "@/components/Sidebar";
+
 
 export default function BlogPage() {
   const [currentPage, setCurrentPage] = useState(1);

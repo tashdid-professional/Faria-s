@@ -154,17 +154,17 @@ function ShopContent() {
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   onClick={() => setIsSidebarOpen(false)}
-                  className="fixed inset-0 bg-black/40 z-[90] lg:hidden"
+                  className="fixed inset-0 bg-black/40 z-90 lg:hidden"
                 />
                 <motion.aside 
                   initial={{ x: "-100%" }}
                   animate={{ x: 0 }}
                   exit={{ x: "-100%" }}
                   transition={{ type: "spring", damping: 25, stiffness: 200 }}
-                  className="fixed inset-y-0 left-0 w-[80%] max-w-[300px] bg-white z-[100] lg:hidden p-8 flex flex-col"
+                  className="fixed inset-y-0 left-0 w-[80%] max-w-75 bg-white z-100 lg:hidden p-8 flex flex-col"
                 >
                   <div className="flex justify-between items-center mb-10 pb-4 border-b border-neutral-100">
-                    <h4 className="text-[12px] font-semibold uppercase tracking-[0.1em]">
+                    <h4 className="text-[12px] font-semibold uppercase tracking-widest">
                       Categories
                     </h4>
                     <button onClick={() => setIsSidebarOpen(false)} className="p-1 hover:rotate-90 transition-transform duration-300">
@@ -205,7 +205,7 @@ function ShopContent() {
           {/* Sidebar - Desktop Only */}
           <aside className="hidden lg:block lg:w-1/4 space-y-12">
             <div className="sticky top-32">
-              <h4 className="text-[12px] font-semibold uppercase tracking-[0.1em] mb-10 pb-4 border-b border-neutral-100">
+              <h4 className="text-[12px] font-semibold uppercase tracking-widest mb-10 pb-4 border-b border-neutral-100">
                 Product Categories
               </h4>
               <ul className="space-y-5">
@@ -257,7 +257,7 @@ function ShopContent() {
                
               </div>
 
-              <div className="relative w-full md:w-auto min-w-[220px]">
+              <div className="relative w-full md:w-auto min-w-55">
                 <select 
                   value={sortOrder}
                   onChange={(e) => {

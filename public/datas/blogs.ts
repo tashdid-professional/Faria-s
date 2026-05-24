@@ -23,7 +23,7 @@ export const blogs: Blog[] = [
     title: "THE COSMETICS WORLD",
     excerpt: "Est diam debitis an, error recusabo id pro, quo eripuit civibus ut. Mel ut tamquam erroribus, ad nonumy vituperata mei.Et ...",
     description: "Lorem ipsum dolor sit amet, odio legere cotidieque ex quo, an noster evertitur vel, ei solet democritum est. Id mel tibique ancillae convenire. Admodum tacimates maiestatis his id. Sed everti accusamus facilisi ne. Est diam debitis an, error recusabo id pro, quo eripuit civibus ut. Mel ut tamquam erroribus, ad nonumy vituperata mei. Et qui falli latine consequuntur. In appellantur concludaturque pro. Commune scriptorem ad pri, ut euripidis posidonium has. Eum ei verear dolorum. Duo quas viris delenit cu, dolores inciderint scribentur mel in. Option elaboraret et mea, sea eligendi insolens scripserit et, tantas assueverit liberavisse vim at. Prima modus erroribus id cum, te mea munere doming equidem. At per ullum facilisis. Lorem ipsum dolor sit amet, ceteros temporibus mei ad, eum Mel purto adipisci eu, ex eum nisl consul, has virtute inermis ne. Eripxit delicatissimi in eos. Pri ut congue dolorem. Impetus consequat in qui, pro posse bonorum delicatissimi ad, veri voluptatibus ei qui. Munere accusamus ex has, pri vero populo voluptaria eum no, eos atomoru.",
-    image: "/images/products/1.jpg",
+    image: "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?q=80&w=2070&auto=format&fit=crop",
     isFeatured: true,
   },
   {
@@ -36,7 +36,7 @@ export const blogs: Blog[] = [
     title: "PREP A GOOD PRIMER",
     excerpt: "Est diam debitis an, error recusabo id pro, quo eripuit civibus ut. Mel ut tamquam erroribus, ad nonumy vituperata mei.Et ...",
     description: "Est diam debitis an, error recusabo id pro, quo eripuit civibus ut. Mel ut tamquam erroribus, ad nonumy vituperata mei. Et qui falli latine consequuntur. In appellantur concludaturque pro. Commune scriptorem ad pri, ut euripidis posidonium has. Eum ei verear dolorum. Duo quas viris delenit cu, dolores inciderint scribentur mel in. Option elaboraret et mea, sea eligendi insolens scripserit et, tantas assueverit liberavisse vim at. Prima modus erroribus id cum, te mea munere doming equidem. At per ullum facilisis. Lorem ipsum dolor sit amet, ceteros temporibus mei ad, eum Mel purto adipisci eu, ex eum nisl consul, has virtute inermis ne. Eripxit delicatissimi in eos. Pri ut congue dolorem. Impetus consequat in qui, pro posse bonorum delicatissimi ad, veri voluptatibus ei qui. Munere accusamus ex has, pri vero populo voluptaria eum no, eos atomoru.",
-    image: "/images/products/2.jpg",
+    image: "https://images.unsplash.com/photo-1599733594230-6b823276abcc?q=80&w=2070&auto=format&fit=crop",
     isFeatured: true,
   },
   {
@@ -49,7 +49,7 @@ export const blogs: Blog[] = [
     title: "KNOW HOW TO APPLY IT",
     excerpt: "Est diam debitis an, error recusabo id pro, quo eripuit civibus ut. Mel ut tamquam erroribus, ad nonumy vituperata mei.Et ...",
     description: "Est diam debitis an, error recusabo id pro, quo eripuit civibus ut. Mel ut tamquam erroribus, ad nonumy vituperata mei. Et qui falli latine consequuntur. In appellantur concludaturque pro. Commune scriptorem ad pri, ut euripidis posidonium has. Eum ei verear dolorum. Duo quas viris delenit cu, dolores inciderint scribentur mel in. Option elaboraret et mea, sea eligendi insolens scripserit et, tantas assueverit liberavisse vim at. Prima modus erroribus id cum, te mea munere doming equidem. At per ullum facilisis. Lorem ipsum dolor sit amet, ceteros temporibus mei ad, eum Mel purto adipisci eu, ex eum nisl consul, has virtute inermis ne. Eripxit delicatissimi in eos. Pri ut congue dolorem. Impetus consequat in qui, pro posse bonorum delicatissimi ad, veri voluptatibus ei qui. Munere accusamus ex has, pri vero populo voluptaria eum no, eos atomoru.",
-    image: "/images/products/3.jpg",
+    image: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=2087&auto=format&fit=crop",
   },
   {
     id: 4,
@@ -61,7 +61,7 @@ export const blogs: Blog[] = [
     title: "50 SHADES OF GREAT",
     excerpt: "Est diam debitis an, error recusabo id pro, quo eripuit civibus ut. Mel ut tamquam erroribus, ad nonumy vituperata mei.Et ...",
     description: "Est diam debitis an, error recusabo id pro, quo eripuit civibus ut. Mel ut tamquam erroribus, ad nonumy vituperata mei. Et qui falli latine consequuntur. In appellantur concludaturque pro. Commune scriptorem ad pri, ut euripidis posidonium has. Eum ei verear dolorum. Duo quas viris delenit cu, dolores inciderint scribentur mel in. Option elaboraret et mea, sea eligendi insolens scripserit et, tantas assueverit liberavisse vim at. Prima modus erroribus id cum, te mea munere doming equidem. At per ullum facilisis. Lorem ipsum dolor sit amet, ceteros temporibus mei ad, eum Mel purto adipisci eu, ex eum nisl consul, has virtute inermis ne. Eripxit delicatissimi in eos. Pri ut congue dolorem. Impetus consequat in qui, pro posse bonorum delicatissimi ad, veri voluptatibus ei qui. Munere accusamus ex has, pri vero populo voluptaria eum no, eos atomoru.",
-    image: "/images/products/10.jpg",
+    image: "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?q=80&w=2070&auto=format&fit=crop",
   },
   {
     id: 5,

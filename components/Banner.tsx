@@ -32,14 +32,14 @@ export default function Banner() {
           <div className="absolute inset-0 bg-black/5" />
 
           {/* Content */}
-          <div className="relative h-full flex flex-col justify-center px-6 lg:px-24 max-w-2xl">
+          <div className="relative h-full flex flex-col justify-center container ">
             <p className="text-xs lg:text-base font-lato  tracking-[2.3px]  mb-4 animate-fadeIn text-[#202020]">
               {slide.subtitle}
             </p>
             <h1 className="text-4xl lg:text-[43px] font-outfit font-medium text-black mb-6 leading-tight animate-fadeIn">
               {slide.title}
             </h1>
-            <p className="text-sm lg:text-base text-[#202020]  mb-10 leading-relaxed font-lato animate-fadeIn animation-delay-300">
+            <p className="text-sm lg:text-base text-[#202020]  mb-10 leading-relaxed font-lato animate-fadeIn animation-delay-300 max-w-2xl">
               {slide.description}
             </p>
             <div className="animate-fadeIn animation-delay-500">
