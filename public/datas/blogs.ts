@@ -53,7 +53,7 @@ export const blogs: Blog[] = [
   },
   {
     id: 4,
-    slug: "50-shades-of-testing texts",
+    slug: "50-shades-of-great",
     category: "idk",
     author: "Tashdid",
     day: "08",
@@ -78,7 +78,7 @@ export const blogs: Blog[] = [
   },
   {
     id: 6,
-    slug: "art-of-perfect-eyeliner",
+    slug: "art-of-perfect-eyeliner-test",
     category: "Eyes",
     author: "Marco V",
     day: "02",

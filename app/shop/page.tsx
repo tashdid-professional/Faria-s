@@ -38,7 +38,8 @@ function ShopContent() {
     const matchesCategory = selectedCategory ? p.category === selectedCategory : true;
     const matchesSearch = searchQuery 
       ? p.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
-        p.category.toLowerCase().includes(searchQuery.toLowerCase())
+        p.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        p.tags?.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()))
       : true;
     return matchesCategory && matchesSearch;
   });

@@ -5,12 +5,18 @@ import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { blogs } from "@/public/datas/blogs";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import ScrollToTop from "@/components/ScrollToTop";
 
 export default function BlogDetailsPage() {
   const params = useParams();
   const slug = params?.slug as string;
   
-  const blog = blogs.find((b) => b.slug === slug);
+  const blogIndex = blogs.findIndex((b) => b.slug === slug);
+  const blog = blogs[blogIndex];
+  const prevBlog = blogIndex > 0 ? blogs[blogIndex - 1] : null;
+  const nextBlog = blogIndex < blogs.length - 1 ? blogs[blogIndex + 1] : null;
 
   if (!blog) {
     return (
@@ -24,20 +30,33 @@ export default function BlogDetailsPage() {
   }
 
   return (
-    <main className="bg-white min-h-screen font-sans">
-    
-      <hr className="text-gray-300"></hr>
+    <main className="bg-white min-h-screen">
+      <Navbar />
+
+      {/* Hero Header - Same as Shop Page */}
+      <section className="relative h-[400px] lg:h-[500px] flex items-center justify-center overflow-hidden bg-[#FCF7EE]">
+        <div className="relative z-10 text-center pt-20">
+          <h1 className="text-4xl md:text-[50px] font-bold font-outfit text-black mb-4 uppercase">
+            {blog.title}
+          </h1>
+          <nav className="flex items-center justify-center space-x-3 text-[12px] font-bold tracking-[0.2em] text-black uppercase font-lato">
+            <Link href="/" className="hover:text-[#b6713e] transition-colors">HOME</Link>
+            <span className="text-[#b6713e]">♦</span>
+            <Link href="/blog" className="hover:text-[#b6713e] transition-colors">BLOG</Link>
+            <span className="text-[#b6713e]">♦</span>
+            <span className="opacity-50 truncate max-w-[200px]">{blog.slug}</span>
+          </nav>
+        </div>
+      </section>
+
       {/* Content Section */}
-      <section className="pb-16 md:pb-20 container pt-10">
+      <section className="pb-16 md:pb-32 container pt-20">
         <div className=" flex flex-col lg:flex-row gap-16">
           
-          {/* Sidebar - Desktop Left, Mobile Bottom */}
-          <div className="w-full lg:w-1/4 order-2 lg:order-1 ">
-            
-          </div>
+         
 
           {/* Main Content */}
-          <div className="w-full lg:w-3/4 order-1 lg:order-2">
+          <div className="w-full  order-1 lg:order-2">
             <div className="relative aspect-video overflow-hidden mb-8 bg-neutral-50">
               <Image
                 src={blog.image.startsWith('/') ? (blog.image.startsWith('/Images') ? blog.image.replace('/Images', '/images') : blog.image) : blog.image}
@@ -48,30 +67,54 @@ export default function BlogDetailsPage() {
               />
             </div>
 
-            {/* Detailed Meta */}
-              <div className="flex items-center gap-4 text-[11px] font-sans font-medium uppercase tracking-[0.15em] text-neutral-500">
-                 <span>{blog.month} {blog.day}, 2024</span>
-                 <span className="w-1.5 h-px bg-neutral-300" />
-                 <span className="text-[#ef4626]">{blog.category}</span>
-                 <span className="w-1.5 h-px bg-neutral-300" />
-                 <span>By {blog.author}</span>
+            {/* Author, Date, and Category Section */}
+            <div className="  mb-12">
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-8">
+                {/* Author Info */}
+                <div className="flex flex-col">
+                  <span className="text-[12px] text-gray-500 font-lato mb-1">Written by</span>
+                  <span className="text-[16px] font-bold text-black font-outfit lowercase tracking-tight">
+                    {blog.author}
+                  </span>
+                </div>
+
+                {/* Date with lines */}
+                <div className="flex items-center gap-4">
+                  <div className="h-[1px] w-8 bg-gray-300"></div>
+                  <span className="text-[14px] font-bold text-black font-lato uppercase tracking-[0.1em]">
+                    {blog.month} - {blog.day} - 2024
+                  </span>
+                  <div className="h-[1px] w-8 bg-gray-300"></div>
+                </div>
               </div>
 
-            <div className="my-4">
-              <h1 className="text-3xl md:text-4xl lg:text-4xl font-serif  mb-6 leading-tight">
+              {/* Decorative line */}
+              <div className="h-[1px] w-full bg-gray-200 mt-8 mb-6"></div>
+
+              {/* Categories */}
+              <div className="flex flex-wrap gap-3">
+                <span className="bg-[#EFE4D5] text-black px-6 py-2 text-[12px] font-bold tracking-[0.15em] font-lato uppercase">
+                  {blog.category}
+                </span>
+                <span className="bg-[#EFE4D5] text-black px-6 py-2 text-[12px] font-bold tracking-[0.15em] font-lato uppercase">
+                  BEAUTY
+                </span>
+              </div>
+            </div>
+
+            <div className="">
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold font-outfit text-black mb-4 leading-tight uppercase">
                 {blog.title}
               </h1>
-              
-              
             </div>
 
             <div className="prose prose-neutral max-w-none">
-              <p className="text-neutral-600 text-[16px] md:text-[18px] leading-[1.8] mb-8">
+              <p className="text-[#202020] text-[16px]  leading-[1.8] mb-8">
                 {blog.description}
               </p>
               
               {/* This space is for future-proofing with more content if needed */}
-              <div className="mt-12 pt-12 border-t border-neutral-100 flex flex-col md:flex-row md:items-center justify-between gap-6">
+              <div className="mt-12 pt-12 border-t border-neutral-100 hidden">
                  <div className="flex items-center gap-4">
                     <span className="text-[12px] font-bold uppercase tracking-widest">Tags:</span>
                     <div className="flex gap-2">
@@ -81,64 +124,77 @@ export default function BlogDetailsPage() {
                  </div>
               </div>
 
-              {/* Comment Section */}
-              <div className="mt-20 pt-16 border-t border-neutral-100">
-                <h3 className="text-3xl font-serif mb-8 text-neutral-900">Leave a Reply</h3>
-                <p className="text-[14px] text-neutral-500 mb-8 italic">Your email address will not be published. Required fields are marked *</p>
-                
-                <form className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div className="space-y-2">
-                      <input 
-                        type="text" 
-                        placeholder="Name *" 
-                        className="w-full border border-neutral-200 px-5 py-4 text-[14px] focus:border-neutral-900 outline-none transition-colors"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <input 
-                        type="email" 
-                        placeholder="Email *" 
-                        className="w-full border border-neutral-200 px-5 py-4 text-[14px] focus:border-neutral-900 outline-none transition-colors"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <input 
-                        type="text" 
-                        placeholder="Website" 
-                        className="w-full border border-neutral-200 px-5 py-4 text-[14px] focus:border-neutral-900 outline-none transition-colors"
-                      />
-                    </div>
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <textarea 
-                      placeholder="Comment *" 
-                      rows={6}
-                      className="w-full border border-neutral-200 px-5 py-4 text-[14px] focus:border-neutral-900 outline-none transition-colors resize-none"
-                    ></textarea>
-                  </div>
+              
+            </div>
 
-                  <div className="flex items-center gap-3">
-                    <input type="checkbox" id="save-info" className="w-4 h-4 accent-neutral-900" />
-                    <label htmlFor="save-info" className="text-[13px] text-neutral-500 select-none">
-                      Save my name, email, and website in this browser for the next time I comment.
-                    </label>
+            {/* Newsletter/Navigation Section */}
+            <div className="mt-20 border border-black/10 flex flex-col md:flex-row bg-[#FCF7EE]">
+              {/* Previous Story */}
+              <div className="flex-1 p-8 md:p-12 md:border-r border-black/10 flex items-center justify-between group transition-colors hover:bg-[#EFE4D5]">
+                <div className="flex flex-col space-y-2">
+                  <span className="text-[10px] font-bold tracking-[0.2em] text-gray-500 uppercase font-lato">
+                    PREVIOUS STORY
+                  </span>
+                  {prevBlog ? (
+                    <Link href={`/blog/${prevBlog.slug}`}>
+                      <h4 className="text-[18px] md:text-[20px] font-bold font-outfit text-black leading-tight group-hover:text-[#b6713e] transition-colors">
+                        {prevBlog.title}
+                      </h4>
+                    </Link>
+                  ) : (
+                    <h4 className="text-[18px] font-bold font-outfit text-black">
+                      No story to show!
+                    </h4>
+                  )}
+                </div>
+                {prevBlog && (
+                  <div className="hidden sm:block relative w-16 h-16 shrink-0 ml-4 overflow-hidden rounded-sm">
+                    <Image
+                      src={prevBlog.image}
+                      alt={prevBlog.title}
+                      fill
+                      className="object-cover"
+                    />
                   </div>
+                )}
+              </div>
 
-                  <button 
-                    type="submit" 
-                    className="bg-neutral-900 text-white text-[11px] font-bold uppercase tracking-[0.2em] px-10 py-4 hover:bg-[#ef4626] transition-colors duration-300"
-                  >
-                    Post Comment
-                  </button>
-                </form>
+              {/* Next Story */}
+              <div className="flex-1 p-8 md:p-12 text-right flex items-center justify-between group transition-colors hover:bg-[#EFE4D5]">
+                {nextBlog && (
+                  <div className="hidden sm:block relative w-16 h-16 shrink-0 mr-4 overflow-hidden rounded-sm text-left">
+                    <Image
+                      src={nextBlog.image}
+                      alt={nextBlog.title}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                )}
+                <div className="flex flex-col space-y-2 flex-grow">
+                  <span className="text-[10px] font-bold tracking-[0.2em] text-gray-500 uppercase font-lato">
+                    NEXT STORY
+                  </span>
+                  {nextBlog ? (
+                    <Link href={`/blog/${nextBlog.slug}`}>
+                      <h4 className="text-[18px] md:text-[20px] font-bold font-outfit text-black leading-tight group-hover:text-[#b6713e] transition-colors">
+                        {nextBlog.title}
+                      </h4>
+                    </Link>
+                  ) : (
+                    <h4 className="text-[18px] font-bold font-outfit text-black">
+                      No story to show!
+                    </h4>
+                  )}
+                </div>
               </div>
             </div>
           </div>
 
         </div>
       </section>
+      <Footer />
+      <ScrollToTop />
     </main>
   );
 }

@@ -1,3 +1,7 @@
+export const topBarData = {
+  text: "BLACK FRIDAY: USE CODE BEAUTY20 TO CLAIM OFFER",
+};
+
 export const bannerData = [
   {
     id: 1,
