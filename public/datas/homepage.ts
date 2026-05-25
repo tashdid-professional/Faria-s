@@ -58,8 +58,9 @@ export const footerData = {
     links: [
       { name: "Home", href: "/" },
       { name: "Shop", href: "/shop" },
-      { name: "Collection", href: "/collection" },
+      { name: "About", href: "/about" },
       { name: "Blog", href: "/blog" },
+      { name: "Contact", href: "/contact" },
     ],
   },
   newsletter: {

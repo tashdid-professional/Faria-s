@@ -8,6 +8,9 @@ import { useParams } from "next/navigation";
 import ProductCard from "@/components/ProductCard";
 import { products } from "@/public/datas/products";
 import { shopHeader } from "@/public/datas/homepage";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import ScrollToTop from "@/components/ScrollToTop";
 
 export default function ProductDetailsPage() {
   const { slug } = useParams();
@@ -30,13 +33,12 @@ export default function ProductDetailsPage() {
   if (!product) {
     return (
       <main className="min-h-screen bg-white">
-        
-        
+        <Navbar />
         <div className="container mx-auto px-4 py-40 text-center">
           <h2 className="text-2xl tracking-[0.08em] uppercase">Product Not Found</h2>
           <Link href="/shop" className="mt-8 inline-block text-sm tracking-[0.08em] uppercase border-b border-black pb-1">Back to Shop</Link>
         </div>
-       
+        <Footer />
       </main>
     );
   }
@@ -49,21 +51,25 @@ export default function ProductDetailsPage() {
 
   return (
     <main className="min-h-screen bg-white">
-     
+      <Navbar />
+      
+      {/* Hero Header */}
+      <section className="relative h-[400px] lg:h-[500px] flex items-center justify-center overflow-hidden bg-[#FCF7EE]">
+        <div className="relative z-10 text-center pt-20">
+          <h1 className="text-6xl md:text-[60px] font-bold font-outfit text-black mb-4 ">
+            Shop
+          </h1>
+          <nav className="flex items-center justify-center space-x-3 text-[12px] font-bold tracking-[0.2em] text-black uppercase font-lato">
+            <Link href="/" className="hover:text-[#b6713e] transition-colors">HOME</Link>
+            <span className="text-[#b6713e]">♦</span>
+            <Link href="/shop" className="hover:text-[#b6713e] transition-colors">SHOP</Link>
+            <span className="text-[#b6713e]">♦</span>
+            <span className="opacity-50">{product.name}</span>
+          </nav>
+        </div>
+      </section>
 
-     
-        <hr className="text-gray-300"></hr>
-
-      <div className="container pb-16 md:pb-20 pt-10">
-        {/* Breadcrumbs */}
-        <nav className="flex items-center gap-2 mb-10 md:mb-14 text-[11px] md:text-xs tracking-[0.1em] uppercase font-medium">
-          <Link href="/" className="text-black hover:text-[#d4b1a4] transition-colors">Home</Link>
-          <span className="text-[#ccc]">/</span>
-          <Link href="/shop" className="text-black hover:text-[#d4b1a4] transition-colors">Shop</Link>
-          <span className="text-[#ccc]">/</span>
-          <span className="text-[#a1a1a1]">{product.name}</span>
-        </nav>
-
+      <div className="container pb-16 md:pb-20 pt-16">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
           
           {/* Left: Image Gallery */}
@@ -102,29 +108,29 @@ export default function ProductDetailsPage() {
 
           {/* Right: Product Info */}
           <div className="flex flex-col justify-start max-w-lg">
-            <h1 className="text-3xl md:text-4xl tracking-normal text-black mb-6 font-serif">
+            <h1 className="text-3xl md:text-[32px] tracking-normal text-black mb-6 font-bold font-outfit">
               {product.name}
             </h1>
             
             <div className="flex items-center gap-4 mb-6 md:mb-8 font-serif">
               {product.oldPrice && (
-                <span className="font-serif text-[#999] line-through text-lg md:text-xl">
+                <span className="font-lato text-[#999] line-through text-lg md:text-xl">
                   ${product.oldPrice.toFixed(2)}
                 </span>
               )}
-              <span className="font-serif text-black text-xl md:text-2xl">
+              <span className="font-lato text-black text-xl md:text-[20px]">
                 ${product.price.toFixed(2)}
               </span>
             </div>
 
-            <p className="text-[#a1a1a1] font-sans text-base md:text-[15px] leading-relaxed mb-8 md:mb-10 whitespace-pre-line">
+            <p className="text-[#202020] font-sans text-base  leading-relaxed mb-8 md:mb-10 whitespace-pre-line">
               {product.description}
             </p>
 
             {/* Variants / Dynamic Selection */}
             {product.variants && product.variants.length > 0 && (
               <div className="mb-8 md:mb-10">
-                <span className="text-[10px] md:text-[11px] tracking-[0.08em] uppercase text-black font-semibold block mb-4">
+                <span className="text-[12px] md:text-[14px] tracking-[0.08em] uppercase text-black font-semibold block mb-4">
                   {product.variantType || "Choose Option"}
                 </span>
                 <div className="flex flex-wrap gap-3 md:gap-4">
@@ -132,10 +138,10 @@ export default function ProductDetailsPage() {
                     <button
                       key={idx}
                       onClick={() => setSelectedVariant(variant)}
-                      className={`px-3 md:px-4 py-2 border text-[9px] md:text-[10px] tracking-[0.08em] uppercase transition-all ${
+                      className={`px-5 py-2.5 border text-[11px] md:text-[13px] font-bold tracking-[0.08em] uppercase transition-all duration-300 ${
                         selectedVariant?.name === variant.name
-                          ? "border-black text-black bg-white"
-                          : "border-[#eee] text-[#999] hover:border-black hover:text-black"
+                          ? "bg-[#FCF7EE] border-[#DED0B9] text-black"
+                          : "border-neutral-300 text-neutral-500 hover:border-[#DED0B9] hover:bg-[#FCF7EE] hover:text-black"
                       }`}
                     >
                       {variant.name}
@@ -151,18 +157,18 @@ export default function ProductDetailsPage() {
                 href={product.purchaseLink || "#"} 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="w-full md:w-auto px-12 bg-[#ef4626] border border-[#ef4626] text-white h-14 flex items-center justify-center text-[11px] md:text-xs tracking-[0.08em] uppercase hover:bg-black hover:border-black hover:border hover:text-white transition-all duration-500"
+                className="w-full md:w-auto px-14 bg-black border border-black text-white h-14 flex items-center justify-center text-[12px] md:text-[13px] font-bold tracking-[0.2em] uppercase hover:bg-[#FCF7EE] hover:border-[#DED0B9] hover:text-black transition-all duration-500 font-lato"
               >
-                Purchase
+                Purchase Now
               </a>
             </div>
 
             {/* Meta */}
             <div className="space-y-2 pt-6 md:pt-8 border-t border-[#eee]">
-              <p className="text-[10px] md:text-[11px] tracking-[0.08em] uppercase text-black font-semibold">
-                Category: <span className="font-normal text-[#777] ml-2">{product.category}</span>
+              <p className="text-[11px] md:text-[13px] tracking-[0.08em]  text-black font-semibold">
+                Categories: <span className="font-normal text-[#777] ml-2">{product.category}</span>
               </p>
-              <p className="text-[10px] md:text-[11px] tracking-[0.08em] uppercase text-black font-semibold">
+              <p className="text-[11px] md:text-[13px] tracking-[0.08em]  text-black font-semibold">
                 Tags: <span className="font-normal text-[#777] ml-2">{product.tags.join(", ")}</span>
               </p>
             </div>
@@ -174,20 +180,20 @@ export default function ProductDetailsPage() {
           <div className="flex flex-wrap justify-start gap-4 mb-2">
             <button 
               onClick={() => setActiveTab("description")}
-              className={`flex-1 md:flex-none px-6 md:px-8 py-3 text-[10px] md:text-[11px] tracking-[0.08em] uppercase transition-all border ${
+              className={`flex-1 md:flex-none px-8 md:px-10 py-3.5 text-[11px] md:text-[13px] font-bold tracking-[0.1em] uppercase transition-all duration-300 border ${
                 activeTab === 'description' 
-                ? 'text-black border-black' 
-                : 'text-[#a1a1a1] border-[#eee] hover:border-[#ccc]'
+                ? 'bg-[#FCF7EE] border-[#DED0B9] text-black' 
+                : 'text-neutral-500 border-neutral-300 hover:border-[#DED0B9] hover:bg-[#FCF7EE] hover:text-black'
               }`}
             >
               Description
             </button>
             <button 
               onClick={() => setActiveTab("videos")}
-              className={`flex-1 md:flex-none px-6 md:px-8 py-3 text-[10px] md:text-[11px] tracking-[0.08em] uppercase transition-all border ${
+              className={`flex-1 md:flex-none px-8 md:px-10 py-3.5 text-[11px] md:text-[13px] font-bold tracking-[0.1em] uppercase transition-all duration-300 border ${
                 activeTab === 'videos' 
-                ? 'text-black border-black' 
-                : 'text-[#a1a1a1] border-[#eee] hover:border-[#ccc]'
+                ? 'bg-[#FCF7EE] border-[#DED0B9] text-black' 
+                : 'text-neutral-500 border-neutral-300 hover:border-[#DED0B9] hover:bg-[#FCF7EE] hover:text-black'
               }`}
             >
               Videos
@@ -197,7 +203,7 @@ export default function ProductDetailsPage() {
           <div className="py-8 md:py-12">
             {activeTab === "description" ? (
               <div className="animate-fadeIn">
-                <p className="text-[#a1a1a1] font-serif text-base md:text-lg leading-relaxed">
+                <p className="text-[#202020] font-lato text-base md:text-lg leading-relaxed">
                   {product.description}
                 </p>
               </div>
@@ -226,7 +232,7 @@ export default function ProductDetailsPage() {
         {/* Related Products */}
         {relatedProducts.length > 0 && (
           <div className="mt-20">
-            <h2 className="text-[16px] tracking-normal  mb-6 md:mb-6 font-sans font-medium">Related Products</h2>
+            <h2 className="text-center text-[44px] tracking-normal  mb-6 md:mb-10 font-medium font-outfit">Related Products</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12">
               {relatedProducts.map((rel) => (
                 <ProductCard key={rel.id} product={rel} />
@@ -236,7 +242,8 @@ export default function ProductDetailsPage() {
         )}
       </div>
 
-      
+      <Footer />
+      <ScrollToTop />
     </main>
   );
 }

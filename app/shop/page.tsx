@@ -9,6 +9,9 @@ import ProductCard from "@/components/ProductCard";
 import { shopHeader } from "@/public/datas/homepage";
 import { useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import ScrollToTop from "@/components/ScrollToTop";
 
 function ShopContent() {
   const searchParams = useSearchParams();
@@ -19,24 +22,37 @@ function ShopContent() {
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(categoryParam);
   const [sortOrder, setSortOrder] = useState<string>("a-z");
+  const [searchQuery, setSearchQuery] = useState(searchBarQuery);
 
   // Sync state with URL parameter if it changes
   React.useEffect(() => {
     setSelectedCategory(categoryParam);
+    setSearchQuery(searchBarQuery);
     setCurrentPage(1);
-  }, [categoryParam]);
+  }, [categoryParam, searchBarQuery]);
   
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const productsPerPage = 9; // 3 rows * 3 columns on desktop
   // Filter products by search and category
   const filteredProducts = products.filter(p => {
     const matchesCategory = selectedCategory ? p.category === selectedCategory : true;
-    const matchesSearch = searchBarQuery 
-      ? p.name.toLowerCase().includes(searchBarQuery.toLowerCase()) || 
-        p.category.toLowerCase().includes(searchBarQuery.toLowerCase())
+    const matchesSearch = searchQuery 
+      ? p.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
+        p.category.toLowerCase().includes(searchQuery.toLowerCase())
       : true;
     return matchesCategory && matchesSearch;
   });
+
+  const handleSearch = (val: string) => {
+    const params = new URLSearchParams(searchParams.toString());
+    if (val) params.set("search", val);
+    else params.delete("search");
+    
+    // Use push instead of reload for better UX
+    window.history.pushState(null, "", `?${params.toString()}`);
+    setSearchQuery(val);
+    setCurrentPage(1);
+  };
 
   // Apply Sorting
   const sortedProducts = [...filteredProducts].sort((a, b) => {
@@ -82,36 +98,18 @@ function ShopContent() {
 
   return (
     <main className="bg-white min-h-screen">
-      {/* Dynamic Banner */}
-      <section className="px-6 md:px-10 lg:px-16 ">
-        <div className="relative lg:h-[75vh] min-h-100 flex items-center justify-center text-center px-6 overflow-hidden">
-          {/* Background Overlay */}
-          <div className="absolute inset-0 z-0">
-            <Image 
-              src={shopHeader.image} 
-              alt={shopHeader.title}
-              fill
-              className="object-cover"
-              priority
-            />
-            <div className="absolute inset-0 bg-black/30" />
-          </div>
-
-          <div className="container mx-auto relative z-10 text-white max-w-4xl">
-            <nav className="flex justify-center items-center gap-2 text-[12px] uppercase tracking-widest text-white/80 mb-6 font-medium">
-              <Link href="/" className="hover:text-white transition-colors">Home</Link>
-              <span className="text-white/40">/</span>
-              <span>{shopHeader.breadcrumb}</span>
-            </nav>
-            
-            <h1 className="text-5xl md:text-[100px] font-serif mb-8 leading-none">
-              {shopHeader.title}
-            </h1>
-            
-            <p className="text-[14px] md:text-[15px] leading-relaxed max-w-3xl mx-auto text-white/90">
-              {shopHeader.description}
-            </p>
-          </div>
+      <Navbar/>
+     {/* Hero Header */}
+      <section className="relative h-[400px] lg:h-[500px] flex items-center justify-center overflow-hidden bg-[#FCF7EE]">
+        <div className="relative z-10 text-center pt-20">
+          <h1 className="text-6xl md:text-[60px] font-bold font-outfit text-black mb-4 ">
+            Shop
+          </h1>
+          <nav className="flex items-center justify-center space-x-3 text-[12px] font-bold tracking-[0.2em] text-black uppercase font-lato">
+            <Link href="/" className="hover:text-[#b6713e] transition-colors">HOME</Link>
+            <span className="text-[#b6713e]">♦</span>
+            <span className="opacity-50">SHOP</span>
+          </nav>
         </div>
       </section>
 
@@ -204,41 +202,74 @@ function ShopContent() {
 
           {/* Sidebar - Desktop Only */}
           <aside className="hidden lg:block lg:w-1/4 space-y-12">
-            <div className="sticky top-32">
-              <h4 className="text-[12px] font-semibold uppercase tracking-widest mb-10 pb-4 border-b border-neutral-100">
-                Product Categories
-              </h4>
-              <ul className="space-y-5">
-                <li 
-                  onClick={() => handleCategorySelect(null)}
-                  className="flex items-center justify-between group cursor-pointer"
-                >
-                  <div className="flex items-center gap-3">
-                    <div className={`w-3.5 h-3.5 border transition-colors ${selectedCategory === null ? "bg-black border-black" : "border-neutral-300 group-hover:border-black"}`} />
-                    <span className={`text-[13px] transition-colors font-medium ${selectedCategory === null ? "text-black" : "text-neutral-600 group-hover:text-black"}`}>All Products</span>
+            <div className=" space-y-8">
+              
+              {/* Search Product Widget */}
+              <div className="border border-[#DED0B9] p-6">
+                <div className="bg-[#FAF4EB] py-3.5 px-6 -mx-6 -mt-6 mb-8">
+                  <h4 className="font-outfit font-medium text-[20px] text-black">Search Product</h4>
+                </div>
+                <div className="relative">
+                  <input 
+                    type="text" 
+                    placeholder="Search products..." 
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
+                        handleSearch(e.currentTarget.value);
+                      }
+                    }}
+                    className="w-full border border-neutral-300 px-5 py-4 text-[14px] outline-none focus:border-black transition-colors bg-white pr-12 font-lato"
+                  />
+                  <div 
+                    className="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer"
+                    onClick={() => handleSearch(searchQuery)}
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="3"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="text-black"
+                    >
+                      <circle cx="11" cy="11" r="8"></circle>
+                      <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
                   </div>
-                  <div className="flex items-center gap-3">
-                    <span className="text-[12px] text-neutral-400">({products.length})</span>
-                    <Plus size={14} className="text-neutral-400 group-hover:text-black transition-colors" />
-                  </div>
-                </li>
-                {categories.map((cat) => (
+                </div>
+              </div>
+
+              {/* Product Categories Widget */}
+              <div className="border border-[#DED0B9] p-6">
+                <div className="bg-[#FAF4EB] py-3.5 px-6 -mx-6 -mt-6 mb-8">
+                  <h4 className="font-outfit font-medium text-[20px] text-black">Product categories</h4>
+                </div>
+                <ul className="space-y-6">
                   <li 
-                    key={cat.name} 
-                    onClick={() => handleCategorySelect(cat.name)}
+                    onClick={() => handleCategorySelect(null)}
                     className="flex items-center justify-between group cursor-pointer"
                   >
-                    <div className="flex items-center gap-3">
-                      <div className={`w-3.5 h-3.5 border transition-colors ${selectedCategory === cat.name ? "bg-black border-black" : "border-neutral-300 group-hover:border-black"}`} />
-                      <span className={`text-[13px] transition-colors font-medium ${selectedCategory === cat.name ? "text-black" : "text-neutral-600 group-hover:text-black"}`}>{cat.name}</span>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <span className="text-[12px] text-neutral-400">({cat.count})</span>
-                      <Plus size={14} className="text-neutral-400 group-hover:text-black transition-colors" />
-                    </div>
+                    <span className={`text-[16px] transition-colors  font-outfit ${selectedCategory === null ? "text-[#b6713e]" : "text-black group-hover:text-[#b6713e]"}`}>All Products</span>
+                    <span className="text-[16px] text-black font-lato">({products.length})</span>
                   </li>
-                ))}
-              </ul>
+                  {categories.map((cat) => (
+                    <li 
+                      key={cat.name} 
+                      onClick={() => handleCategorySelect(cat.name)}
+                      className="flex items-center justify-between group cursor-pointer"
+                    >
+                      <span className={`text-[16px] transition-colors  font-outfit ${selectedCategory === cat.name ? "text-[#b6713e]" : "text-black group-hover:text-[#b6713e]"}`}>{cat.name}</span>
+                      <span className="text-[16px] text-black font-lato">({cat.count})</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </aside>
 
@@ -288,7 +319,7 @@ function ShopContent() {
                 <button
                   onClick={() => handlePageChange(Math.max(1, currentPage - 1))}
                   disabled={currentPage === 1}
-                  className="w-11 h-11 border border-neutral-200 flex items-center justify-center text-neutral-400 hover:bg-[#ef4626] hover:text-white hover:border-[#ef4626] transition-all duration-300 disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-neutral-400 disabled:hover:border-neutral-200"
+                  className="w-11 h-11 border border-neutral-300 flex items-center justify-center text-neutral-400 hover:bg-[#FCF7EE] hover:text-black hover:border-[#DED0B9] transition-all duration-300 disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-neutral-400 disabled:hover:border-neutral-300"
                 >
                   <ChevronLeft size={18} />
                 </button>
@@ -299,8 +330,8 @@ function ShopContent() {
                     onClick={() => handlePageChange(i + 1)}
                     className={`w-11 h-11 border text-[13px] font-bold transition-all duration-300 ${
                       currentPage === i + 1 
-                      ? "bg-[#ef4626] border-[#ef4626] text-white" 
-                      : "border-neutral-200 text-neutral-600 hover:bg-[#ef4626] hover:border-[#ef4626] hover:text-white"
+                      ? "bg-[#FCF7EE] border-[#DED0B9] text-black" 
+                      : "border-neutral-300 text-neutral-600 hover:bg-[#FCF7EE] hover:border-[#DED0B9] "
                     }`}
                   >
                     {i + 1}
@@ -310,7 +341,7 @@ function ShopContent() {
                 <button
                   onClick={() => handlePageChange(Math.min(totalPages, currentPage + 1))}
                   disabled={currentPage === totalPages}
-                  className="w-11 h-11 border border-neutral-200 flex items-center justify-center text-neutral-400 hover:bg-[#ef4626] hover:text-white hover:border-[#ef4626] transition-all duration-300 disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-neutral-400 disabled:hover:border-neutral-200"
+                  className="w-11 h-11 border border-neutral-300 flex items-center justify-center text-neutral-400 hover:bg-[#FCF7EE] hover:text-black hover:border-[#DED0B9] transition-all duration-300 disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-neutral-400 disabled:hover:border-neutral-300"
                 >
                   <ChevronRight size={18} />
                 </button>
@@ -320,6 +351,8 @@ function ShopContent() {
 
         </div>
       </section>
+      <Footer />
+      <ScrollToTop />
     </main>
   );
 }
