@@ -97,11 +97,11 @@ export default function ProductCard({ product }: ProductCardProps) {
             <div className="flex items-center gap-2 justify-center">
               {product.oldPrice && (
                 <span className="font-lato text-[14px] text-gray-400 line-through decoration-black/20">
-                  £{product.oldPrice.toFixed(2)}
+                  ৳ {product.oldPrice.toFixed(2)}
                 </span>
               )}
               <span className="text-[14px] font-lato text-black">
-                £{product.price.toFixed(2)}
+                ৳ {product.price.toFixed(2)}
               </span>
             </div>
           </div>

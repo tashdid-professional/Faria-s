@@ -32,6 +32,7 @@ export const navLinks = [
   { name: "Home", href: "/" },
   { name: "About", href: "/about" },
   { name: "Shop", href: "/shop" },
+  { name: "Blog", href: "/blog" },
   { name: "Contact", href: "/contact" },
 ];
 
@@ -59,6 +60,7 @@ export const footerData = {
       { name: "Home", href: "/" },
       { name: "Shop", href: "/shop" },
       { name: "About", href: "/about" },
+      { name: "FAQ", href: "/faq" },
       { name: "Blog", href: "/blog" },
       { name: "Contact", href: "/contact" },
     ],
@@ -132,6 +134,39 @@ export const shopHeader = {
   description: "Discover our premium range of beauty products designed to enhance your natural radiance. From sustainable skincare to high-pigment cosmetics.",
   breadcrumb: "Shop Collection",
   image: "https://images.unsplash.com/photo-1596462502278-27bfdc4033c8?q=80&w=2080&auto=format&fit=crop",
+};
+
+export const faqData = {
+  subtitle: "OUR EXPERTS ANSWER",
+  title: "Faq For Cosmetic Products",
+  image: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=2070&auto=format&fit=crop",
+  faqs: [
+    {
+      id: 1,
+      question: "What is the shelf life of cosmetics?",
+      answer: "Sed libero enim sed faucibus turpis rhoncus est pellentesque elit ullamcorper dignissim cras tincidunt.",
+    },
+    {
+      id: 2,
+      question: "Does your skincare have preservatives in it?",
+      answer: "Sed libero enim sed faucibus turpis rhoncus est pellentesque elit ullamcorper dignissim cras tincidunt.",
+    },
+    {
+      id: 3,
+      question: "Will your skincare products give me an allergic reaction?",
+      answer: "Sed libero enim sed faucibus turpis rhoncus est pellentesque elit ullamcorper dignissim cras tincidunt.",
+    },
+    {
+      id: 4,
+      question: "Can I cancel my order?",
+      answer: "Sed libero enim sed faucibus turpis rhoncus est pellentesque elit ullamcorper dignissim cras tincidunt.",
+    },
+    {
+      id: 5,
+      question: "What are the shipping charges?",
+      answer: "Sed libero enim sed faucibus turpis rhoncus est pellentesque elit ullamcorper dignissim cras tincidunt.",
+    },
+  ],
 };
 
 

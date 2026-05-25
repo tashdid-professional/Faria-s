@@ -115,11 +115,11 @@ export default function ProductDetailsPage() {
             <div className="flex items-center gap-4 mb-6 md:mb-8 font-serif">
               {product.oldPrice && (
                 <span className="font-lato text-[#999] line-through text-lg md:text-xl">
-                  ${product.oldPrice.toFixed(2)}
+                  ৳ {product.oldPrice.toFixed(2)}
                 </span>
               )}
               <span className="font-lato text-black text-xl md:text-[20px]">
-                ${product.price.toFixed(2)}
+                ৳ {product.price.toFixed(2)}
               </span>
             </div>
 
