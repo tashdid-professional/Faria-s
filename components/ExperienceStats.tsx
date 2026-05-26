@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useRef } from "react";
 import { statsData } from "@/public/datas/homepage";
+import { motion } from "framer-motion";
 
 function CountUp({ end, duration = 2000, suffix = "" }: { end: number; duration?: number; suffix?: string }) {
   const [count, setCount] = useState(0);
@@ -64,7 +65,13 @@ export default function ExperienceStats() {
       />
 
       <div className="max-w-7xl mx-auto relative z-10">
-        <div className="text-center max-w-3xl mx-auto mb-12">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="text-center max-w-3xl mx-auto mb-12"
+        >
           <p className="text-[10px] lg:text-[16px] tracking-[0.23em] text-[#202020] mb-2 font-lato uppercase">
             {subtitle}
           </p>
@@ -74,26 +81,45 @@ export default function ExperienceStats() {
           <p className="text-[#202020] font-lato text-sm lg:text-base leading-relaxed">
             {description}
           </p>
-        </div>
+        </motion.div>
 
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 items-center text-center">
           {stats.map((stat, index) => (
-            <div key={index} className="flex flex-col items-center">
+            <motion.div 
+              key={index} 
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: index * 0.1, ease: "easeOut" }}
+              className="flex flex-col items-center"
+            >
               <div className="flex items-center w-full mb-4">
                 {index !== 0 && (
-                  <div className="hidden lg:block grow h-px bg-gray-300 mr-8" />
+                  <motion.div 
+                    initial={{ width: 0 }}
+                    whileInView={{ width: "auto" }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 1, delay: 0.5 }}
+                    className="hidden lg:block grow h-px bg-gray-300 mr-8" 
+                  />
                 )}
                 <h3 className="text-4xl lg:text-[53px] font-bold font-lato text-black w-full lg:w-auto">
                   <CountUp end={stat.value} suffix={stat.suffix} />
                 </h3>
                 {index !== stats.length - 1 && (
-                  <div className="hidden lg:block grow h-px bg-gray-300 ml-8" />
+                  <motion.div 
+                    initial={{ width: 0 }}
+                    whileInView={{ width: "auto" }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 1, delay: 0.5 }}
+                    className="hidden lg:block grow h-px bg-gray-300 ml-8" 
+                  />
                 )}
               </div>
               <p className="text-sm lg:text-[20px] font-medium font-outfit text-black tracking-wide">
                 {stat.label}
               </p>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

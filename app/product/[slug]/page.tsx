@@ -55,7 +55,12 @@ export default function ProductDetailsPage() {
       
       {/* Hero Header */}
       <section className="relative h-[400px] lg:h-[500px] flex items-center justify-center overflow-hidden bg-[#FCF7EE]">
-        <div className="relative z-10 text-center pt-20">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+          className="relative z-10 text-center pt-20"
+        >
           <h1 className="text-6xl md:text-[60px] font-bold font-outfit text-black mb-4 ">
             Shop
           </h1>
@@ -66,14 +71,20 @@ export default function ProductDetailsPage() {
             <span className="text-[#b6713e]">♦</span>
             <span className="opacity-50">{product.name}</span>
           </nav>
-        </div>
+        </motion.div>
       </section>
 
       <div className="container pb-16 md:pb-20 pt-16">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
           
           {/* Left: Image Gallery */}
-          <div className="flex flex-col gap-6">
+          <motion.div 
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="flex flex-col gap-6"
+          >
             {/* Main Image */}
             <div className="relative aspect-[3/4] w-full max-w-[450px] mx-auto md:mx-0 bg-[#f9e2bf] overflow-hidden">
               {product.oldPrice && (
@@ -104,10 +115,16 @@ export default function ProductDetailsPage() {
                 </div>
               ))}
             </div>
-          </div>
+          </motion.div>
 
           {/* Right: Product Info */}
-          <div className="flex flex-col justify-start max-w-lg">
+          <motion.div 
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="flex flex-col justify-start max-w-lg"
+          >
             <h1 className="text-3xl md:text-[32px] tracking-normal text-black mb-6 font-bold font-outfit">
               {product.name}
             </h1>
@@ -172,11 +189,17 @@ export default function ProductDetailsPage() {
                 Tags: <span className="font-normal text-[#777] ml-2">{product.tags.join(", ")}</span>
               </p>
             </div>
-          </div>
+          </motion.div>
         </div>
 
         {/* Tabs Section */}
-        <div className="mt-12 md:mt-12">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="mt-12 md:mt-12"
+        >
           <div className="flex flex-wrap justify-start gap-4 mb-2">
             <button 
               onClick={() => setActiveTab("description")}
@@ -227,18 +250,24 @@ export default function ProductDetailsPage() {
               </div>
             )}
           </div>
-        </div>
+        </motion.div>
 
         {/* Related Products */}
         {relatedProducts.length > 0 && (
-          <div className="mt-20">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="mt-20"
+          >
             <h2 className="text-center text-[44px] tracking-normal  mb-6 md:mb-10 font-medium font-outfit">Related Products</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12">
               {relatedProducts.map((rel) => (
                 <ProductCard key={rel.id} product={rel} />
               ))}
             </div>
-          </div>
+          </motion.div>
         )}
       </div>
 

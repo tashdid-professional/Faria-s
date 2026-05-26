@@ -102,7 +102,12 @@ function ShopContent() {
       <Navbar/>
      {/* Hero Header */}
       <section className="relative h-[400px] lg:h-[500px] flex items-center justify-center overflow-hidden bg-[#FCF7EE]">
-        <div className="relative z-10 text-center pt-20">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+          className="relative z-10 text-center pt-20"
+        >
           <h1 className="text-6xl md:text-[60px] font-bold font-outfit text-black mb-4 ">
             Shop
           </h1>
@@ -111,12 +116,17 @@ function ShopContent() {
             <span className="text-[#b6713e]">♦</span>
             <span className="opacity-50">SHOP</span>
           </nav>
-        </div>
+        </motion.div>
       </section>
 
       {/* Main Content Area */}
-      <section className="py-20 container lg:py-24">        {searchBarQuery && (
-          <div className="mb-10 p-6 bg-neutral-50 border border-neutral-100 flex items-center justify-between">
+      <section className="py-20 container lg:py-24">        
+        {searchBarQuery && (
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mb-10 p-6 bg-neutral-50 border border-neutral-100 flex items-center justify-between"
+          >
             <p className="text-black text-[15px]">
               Showing results for <span className="font-bold underline underline-offset-4 decoration-black/20">"{searchBarQuery}"</span>
               <span className="text-neutral-400 ml-2">({filteredProducts.length} items found)</span>
@@ -127,13 +137,17 @@ function ShopContent() {
             >
               Clear Search
             </Link>
-          </div>
+          </motion.div>
         )}        
 
         <div className=" mx-auto flex flex-col lg:flex-row gap-12 relative lg:static">
           
           {/* Mobile Sticky Toggle Button */}
-          <div className="lg:hidden fixed left-0 top-1/2 -translate-y-1/2 z-40">
+          <motion.div 
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            className="lg:hidden fixed left-0 top-1/2 -translate-y-1/2 z-40"
+          >
             <button 
               onClick={() => setIsSidebarOpen(true)}
               className="bg-black text-white py-6 px-2.5 rounded-r-lg shadow-2xl flex flex-col items-center gap-3 active:scale-95 transition-all group"
@@ -143,7 +157,7 @@ function ShopContent() {
                 Categories
               </span>
             </button>
-          </div>
+          </motion.div>
 
           <AnimatePresence>
             {isSidebarOpen && (
@@ -202,7 +216,13 @@ function ShopContent() {
           </AnimatePresence>
 
           {/* Sidebar - Desktop Only */}
-          <aside className="hidden lg:block lg:w-1/4 space-y-12">
+          <motion.aside 
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="hidden lg:block lg:w-1/4 space-y-12"
+          >
             <div className=" space-y-8">
               
               {/* Search Product Widget */}
@@ -272,10 +292,16 @@ function ShopContent() {
                 </ul>
               </div>
             </div>
-          </aside>
+          </motion.aside>
 
           {/* Product Grid Area */}
-          <div className="w-full lg:w-3/4">
+          <motion.div 
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="w-full lg:w-3/4"
+          >
             
             {/* Filter Bar */}
             <div className="flex flex-col md:flex-row justify-between items-center mb-12 gap-6">
@@ -348,7 +374,7 @@ function ShopContent() {
                 </button>
               </div>
             )}
-          </div>
+          </motion.div>
 
         </div>
       </section>

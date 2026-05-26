@@ -23,7 +23,12 @@ export default function FAQPage() {
       
       {/* Hero Header - Same as Shop Page */}
       <section className="relative h-[400px] lg:h-[500px] flex items-center justify-center overflow-hidden bg-[#FCF7EE]">
-        <div className="relative z-10 text-center pt-20">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+          className="relative z-10 text-center pt-20"
+        >
           <h1 className="text-6xl md:text-[60px] font-bold font-outfit text-black mb-4 ">
             FAQ
           </h1>
@@ -32,20 +37,32 @@ export default function FAQPage() {
             <span className="text-[#b6713e]">♦</span>
             <span className="opacity-50">FAQ</span>
           </nav>
-        </div>
+        </motion.div>
       </section>
 
       {/* FAQ Section */}
       <section className="py-20 lg:pb-32 container  relative overflow-hidden">
         <div className="relative z-10">
-             <div className="text-center mb-26">
+             <motion.div 
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8 }}
+                className="text-center mb-26"
+             >
                 <h1 className="text-[12px] lg:text-[16px] tracking-[0.23em] text-[#202020] font-lato uppercase">GET YOUR ANSWERS</h1>
                 <h2 className="text-4xl lg:text-[43px] font-bold font-outfit text-black">Common Queries</h2>
-            </div>
+            </motion.div>
           <div className="flex flex-col lg:flex-row items-start gap-16 lg:gap-32">
            
             {/* Left Content */}
-            <div className="w-full lg:w-1/2 space-y-12">
+            <motion.div 
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="w-full lg:w-1/2 space-y-12"
+            >
               <div className="space-y-6">
                 <p className="text-[12px] lg:text-[16px] tracking-[0.23em] text-[#202020] font-lato uppercase">
                   {faqData.subtitle}
@@ -56,8 +73,15 @@ export default function FAQPage() {
               </div>
 
               <div className="space-y-0">
-                {faqData.faqs.map((faq) => (
-                  <div key={faq.id} className="border-b border-black/10 py-6 last:border-b-0">
+                {faqData.faqs.map((faq, index) => (
+                  <motion.div 
+                    key={faq.id} 
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    className="border-b border-black/10 py-6 last:border-b-0"
+                  >
                     <button
                       onClick={() => toggleFaq(faq.id)}
                       className="w-full flex items-start text-left focus:outline-none group"
@@ -87,13 +111,19 @@ export default function FAQPage() {
                         </motion.div>
                       )}
                     </AnimatePresence>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
-            </div>
+            </motion.div>
 
             {/* Right Content - Image */}
-            <div className="w-full lg:w-1/2 relative">
+            <motion.div 
+              initial={{ opacity: 0, scale: 1.1 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1, ease: "easeOut" }}
+              className="w-full lg:w-1/2 relative"
+            >
               <div className="relative aspect-[4/5] lg:aspect-auto lg:h-[700px] w-full overflow-hidden shadow-2xl">
                 <Image
                   src={faqData.image}
@@ -103,7 +133,7 @@ export default function FAQPage() {
                   priority
                 />
               </div>
-            </div>
+            </motion.div>
 
           </div>
         </div>

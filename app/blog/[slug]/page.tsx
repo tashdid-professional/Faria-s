@@ -35,7 +35,12 @@ export default function BlogDetailsPage() {
 
       {/* Hero Header - Same as Shop Page */}
       <section className="relative h-[400px] lg:h-[500px] flex items-center justify-center overflow-hidden bg-[#FCF7EE]">
-        <div className="relative z-10 text-center pt-20">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+          className="relative z-10 text-center pt-20"
+        >
           <h1 className="text-4xl md:text-[50px] font-bold font-outfit text-black mb-4 uppercase">
             {blog.title}
           </h1>
@@ -46,12 +51,18 @@ export default function BlogDetailsPage() {
             <span className="text-[#b6713e]">♦</span>
             <span className="opacity-50 truncate max-w-[200px]">{blog.slug}</span>
           </nav>
-        </div>
+        </motion.div>
       </section>
 
       {/* Content Section */}
       <section className="pb-16 md:pb-32 container pt-20">
-        <div className=" flex flex-col lg:flex-row gap-16">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className=" flex flex-col lg:flex-row gap-16"
+        >
           
          
 
@@ -191,7 +202,7 @@ export default function BlogDetailsPage() {
             </div>
           </div>
 
-        </div>
+        </motion.div>
       </section>
       <Footer />
       <ScrollToTop />

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Lato, Outfit } from "next/font/google";
 import "./globals.css";
+import LoadingScreen from "@/components/LoadingScreen";
 
 const lato = Lato({
   subsets: ["latin"],
@@ -28,7 +29,10 @@ export default function RootLayout({
       lang="en"
       className={`${lato.variable} ${outfit.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <LoadingScreen />
+        {children}
+      </body>
     </html>
   );
 }

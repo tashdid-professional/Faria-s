@@ -7,6 +7,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
 import { contactContent } from "@/public/datas/contact";
+import { motion } from "framer-motion";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -36,7 +37,12 @@ export default function ContactPage() {
 
       {/* Hero Header */}
       <section className="relative h-[400px] lg:h-[500px] flex items-center justify-center overflow-hidden bg-[#FCF7EE]">
-        <div className="relative z-10 text-center pt-20">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+          className="relative z-10 text-center pt-20"
+        >
           <h1 className="text-6xl md:text-[60px] font-bold font-outfit text-black mb-4">
             {contactContent.header.title}
           </h1>
@@ -45,22 +51,34 @@ export default function ContactPage() {
             <span className="text-[#b6713e]">♦</span>
             <span className="opacity-50">CONTACT</span>
           </nav>
-        </div>
+        </motion.div>
       </section>
 
       {/* Meet Us Section */}
       <section className="pb-24 bg-[#FCF7EE]/50">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-12"
+          >
             <span className="text-[16px]  tracking-[0.23em] text-[#202020] uppercase font-lato block mb-2">
               {contactContent.branch.subtitle}
             </span>
             <h2 className="text-4xl md:text-[43px] font-medium font-outfit text-black">
               {contactContent.branch.title}
             </h2>
-          </div>
+          </motion.div>
 
-          <div className="max-w-xl mx-auto">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="max-w-xl mx-auto"
+          >
             <div className="bg-[#EBD9C1] p-10 md:p-14 text-center md:text-left flex flex-col gap-8">
               <div className="flex flex-col md:flex-row items-center md:items-start gap-6">
                 <div className="flex-shrink-0">
@@ -89,22 +107,34 @@ export default function ContactPage() {
                 </p>
               </div>
             </div>
-          </div>
+          </motion.div>
 
-          <div className="mt-10 text-center max-w-2xl mx-auto">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="mt-10 text-center max-w-2xl mx-auto"
+          >
             <p className="text-[#202020] leading-loose  font-lato">
               {contactContent.branch.description}
             </p>
             <button className="mt-6 px-10 py-4 bg-[#EBD9C1] text-black font-medium text-[12px] tracking-[0.2em] uppercase hover:bg-black hover:text-white transition-all duration-300">
               Get In Touch
             </button>
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Contact Form Section */}
       <section className="pt-10 pb-24 bg-white">
-        <div className="container mx-auto">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="container mx-auto"
+        >
           <h2 className="text-[32px] font-medium font-outfit mb-12 text-black">
             {contactContent.form.title}
           </h2>
@@ -172,7 +202,7 @@ export default function ContactPage() {
               </button>
             </div>
           </form>
-        </div>
+        </motion.div>
       </section>
 
       <Footer />

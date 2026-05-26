@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { products } from "@/public/datas/products";
 import ProductCard from "./ProductCard";
+import { motion, AnimatePresence } from "framer-motion";
 
 // Helper to fix image paths if they point to old folder
 const fixImagePath = (src: string) => {
@@ -29,17 +30,29 @@ export default function FeaturedProductsSection() {
     <section className="py-24  bg-[#F2E9D4]">
       <div className="container">
         {/* Header */}
-        <div className="text-center mb-12">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="text-center mb-12"
+        >
           <p className="text-[16px] tracking-[0.23em] text-[#202020] mb-2 font-lato uppercase">
             PREMIUM BRANDS
           </p>
           <h2 className="text-4xl lg:text-[43px] font-medium font-outfit text-black mb-12">
             Featured Products
           </h2>
-        </div>
+        </motion.div>
 
         {/* Category Tabs */}
-        <div className="flex flex-wrap justify-center gap-4 mb-16">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+          className="flex flex-wrap justify-center gap-4 mb-16"
+        >
           {categories.map((cat) => (
             <button
               key={cat}
@@ -58,13 +71,23 @@ export default function FeaturedProductsSection() {
               {cat}
             </button>
           ))}
-        </div>
+        </motion.div>
 
         {/* Products Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {filteredProducts.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
+          <AnimatePresence mode="wait">
+            {filteredProducts.map((product, index) => (
+              <motion.div
+                key={`${activeCategory}-${product.id}`}
+                initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.9, y: 10 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+              >
+                <ProductCard product={product} />
+              </motion.div>
+            ))}
+          </AnimatePresence>
         </div>
       </div>
     </section>

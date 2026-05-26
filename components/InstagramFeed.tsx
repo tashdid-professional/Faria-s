@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { instagramData } from "@/public/datas/homepage";
+import { motion } from "framer-motion";
 
 export default function InstagramFeed() {
   const { subtitle, title, images } = instagramData;
@@ -12,16 +13,28 @@ export default function InstagramFeed() {
 
   return (
     <section className="py-24 bg-[#FCF7EE] overflow-hidden">
-      <div className="text-center mb-12">
+      <motion.div 
+        initial={{ opacity: 0, scale: 0.95 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 1, ease: "easeOut" }}
+        className="text-center mb-12"
+      >
         <p className="text-[16px] tracking-[0.23em] text-[#202020] mb-2 font-lato uppercase">
           {subtitle}
         </p>
         <h2 className="text-4xl lg:text-[43px] font-medium font-outfit text-black mb-12">
           {title}
         </h2>
-      </div>
+      </motion.div>
 
-      <div className="relative group">
+      <motion.div 
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 1, delay: 0.3 }}
+        className="relative group"
+      >
         {/* Scroller Container */}
         <div className="flex w-max animate-scroll grayscale-50 hover:grayscale-0 transition-all duration-700">
           {displayImages.map((image, index) => (
@@ -51,7 +64,7 @@ export default function InstagramFeed() {
             </Link>
           ))}
         </div>
-      </div>
+      </motion.div>
 
       <style jsx global>{`
         @keyframes scroll {
