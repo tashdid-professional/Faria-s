@@ -181,9 +181,10 @@ export default function Navbar() {
 
     {/* Mobile Menu */}
       <div
-        className={`fixed inset-0 bg-[#FCF7EE] z-60 flex flex-col items-center justify-center space-y-8 transition-transform duration-500 ease-in-out md:hidden ${
+        className={`fixed inset-0 bg-[#FCF7EE] z-[60] flex flex-col items-center justify-center space-y-8 transition-transform duration-500 ease-in-out md:hidden ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
+        style={{ visibility: isOpen ? 'visible' : 'hidden' }}
       >
         <button
           className="absolute top-6 right-6 text-black"

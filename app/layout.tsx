@@ -27,9 +27,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${lato.variable} ${outfit.variable} h-full antialiased`}
+      className={`${lato.variable} ${outfit.variable} h-full antialiased overflow-x-hidden`}
     >
-      <body className="min-h-full flex flex-col">
+      <body className="min-h-full flex flex-col overflow-x-hidden">
         <LoadingScreen />
         {children}
       </body>

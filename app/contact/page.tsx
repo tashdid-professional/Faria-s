@@ -55,7 +55,7 @@ export default function ContactPage() {
       </section>
 
       {/* Meet Us Section */}
-      <section className="pb-24 bg-[#FCF7EE]/50">
+      <section className="pb-24 pt-16 bg-[#FCF7EE]/50">
         <div className="container mx-auto px-4">
           <motion.div 
             initial={{ opacity: 0, scale: 0.95 }}

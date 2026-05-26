@@ -29,7 +29,7 @@ export default function WhatWeDo() {
   } as const;
 
   return (
-    <section className="bg-[#FCF7EE] py-20 lg:py-32 ">
+    <section className="bg-[#FCF7EE] py-20 lg:py-32 overflow-hidden">
       <div className="container">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-start">
           
