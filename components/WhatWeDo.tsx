@@ -12,21 +12,21 @@ export default function WhatWeDo() {
     whileInView: { opacity: 1, y: 0 },
     viewport: { once: true },
     transition: { duration: 0.8, ease: "easeOut" }
-  };
+  } as const;
 
   const fadeInLeft = {
     initial: { opacity: 0, x: -100 },
     whileInView: { opacity: 1, x: 0 },
     viewport: { once: true },
     transition: { duration: 1, ease: "easeOut" }
-  };
+  } as const;
 
   const fadeInRight = {
     initial: { opacity: 0, x: 100 },
     whileInView: { opacity: 1, x: 0 },
     viewport: { once: true },
     transition: { duration: 1, ease: "easeOut" }
-  };
+  } as const;
 
   return (
     <section className="bg-[#FCF7EE] py-20 lg:py-32 ">
