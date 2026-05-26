@@ -96,7 +96,7 @@ export default function Banner() {
             >
               <Link
                 href={bannerData[currentSlide].buttonLink}
-                className="inline-block px-8 py-4 border border-black text-xs font-lato  tracking-widest text-black hover:bg-black hover:text-white transition-all duration-500"
+                className="inline-block px-8 py-3 border border-black text-xs font-lato  tracking-widest text-black hover:bg-black hover:text-white transition-all duration-500"
               >
                 {bannerData[currentSlide].buttonText}
               </Link>
