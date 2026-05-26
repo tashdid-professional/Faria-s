@@ -8,6 +8,7 @@ import { blogs } from "@/public/datas/blogs";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
+import { motion } from "framer-motion";
 
 export default function BlogDetailsPage() {
   const params = useParams();
