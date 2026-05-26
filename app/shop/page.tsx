@@ -150,7 +150,7 @@ function ShopContent() {
           >
             <button 
               onClick={() => setIsSidebarOpen(true)}
-              className="bg-black text-white py-6 px-2.5 rounded-r-lg shadow-2xl flex flex-col items-center gap-3 active:scale-95 transition-all group"
+              className="bg-[#FCF7EE] text-black py-6 px-2.5  shadow-2xl flex flex-col items-center gap-3 active:scale-95 transition-all group"
             >
               <List size={18} className="group-hover:scale-110 transition-transform" />
               <span className="text-[10px] font-bold uppercase tracking-[0.2em] transform rotate-180 [writing-mode:vertical-lr]">
