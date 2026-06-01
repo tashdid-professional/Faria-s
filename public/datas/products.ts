@@ -12,6 +12,7 @@ export interface Product {
   oldPrice?: number;
   image: string;
   badge?: "Sale" | "New";
+  shortDescription?: string;
   description: string;
   slug: string;
   tags: string[];
@@ -57,6 +58,8 @@ export const products: Product[] = [
     ],
     videos: ["EngW7tLk6R8", "a3ICNMQW7Ok"],
     purchaseLink: "#"
+  ,
+    shortDescription: "Sheer, buildable color with a velvety finish."
   },
   {
     id: 2,
@@ -71,6 +74,8 @@ export const products: Product[] = [
     gallery: ["https://picsum.photos/seed/r42h1nd2/800/600", "https://picsum.photos/seed/c3k2nu7j/800/600"],
     videos: ["vP9X2V9c3Uw"],
     purchaseLink: "#"
+  ,
+    shortDescription: "Bold palette with long-lasting pigments."
   },
   {
     id: 3,
@@ -85,6 +90,8 @@ export const products: Product[] = [
     gallery: ["https://picsum.photos/seed/b75yfac2/800/600"],
     videos: ["vP9X2V9c3Uw"],
     purchaseLink: "#"
+  ,
+    shortDescription: "Creamy formula for all-day comfort."
   },
   {
     id: 4,
@@ -100,6 +107,8 @@ export const products: Product[] = [
     gallery: ["https://picsum.photos/seed/guykcomh/800/600"],
     videos: ["vP9X2V9c3Uw"],
     purchaseLink: "#"
+  ,
+    shortDescription: "Lightweight glow for a sun-kissed look."
   },
   {
     id: 5,
@@ -115,6 +124,8 @@ export const products: Product[] = [
     gallery: ["https://picsum.photos/seed/nkdcq032/800/600"],
     videos: ["vP9X2V9c3Uw"],
     purchaseLink: "#"
+  ,
+    shortDescription: "Dramatic, high-impact color for evenings."
   },
   {
     id: 6,
@@ -130,6 +141,8 @@ export const products: Product[] = [
     gallery: ["https://picsum.photos/seed/ld99rdhi/800/600"],
     videos: ["vP9X2V9c3Uw"],
     purchaseLink: "#"
+  ,
+    shortDescription: "Smooth matte finish with rich pigment."
   },
   {
     id: 7,
@@ -139,12 +152,14 @@ export const products: Product[] = [
     image: "https://picsum.photos/seed/xcsztg31/800/600",
     featured: true,
     badge: "New",
-    description: "An dico accommodare ius, porro mnesarchum pro in. Cetero fierent urbanitas eam id, sed movet voluptua ut.",
+    description: "An dico accommodare ius, porro mnesarchum pro in. Cetero fierent urbanitas eam id, sed movet voluptua ut.lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.An dico accommodare ius, porro mnesarchum pro in. Cetero fierent urbanitas eam id, sed movet voluptua ut.lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliquaAn dico accommodare ius, porro mnesarchum pro in. Cetero fierent urbanitas eam id, sed movet voluptua ut.lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliquaAn dico accommodare ius, porro mnesarchum pro in. Cetero fierent urbanitas eam id, sed movet voluptua ut.lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliquaAn dico accommodare ius, porro mnesarchum pro in. Cetero fierent urbanitas eam id, sed movet voluptua ut.lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliquaAn dico accommodare ius, porro mnesarchum pro in. Cetero fierent urbanitas eam id, sed movet voluptua ut.lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliquaAn dico accommodare ius, porro mnesarchum pro in. Cetero fierent urbanitas eam id, sed movet voluptua ut.lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliquaAn dico accommodare ius, porro mnesarchum pro in. Cetero fierent urbanitas eam id, sed movet voluptua ut.lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliquaAn dico accommodare ius, porro mnesarchum pro in. Cetero fierent urbanitas eam id, sed movet voluptua ut.lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliquaAn dico accommodare ius, porro mnesarchum pro in. Cetero fierent urbanitas eam id, sed movet voluptua ut.lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
     slug: "glow-serum",
     tags: ["Serum", "Glow"],
     gallery: ["https://picsum.photos/seed/r5mp3ja9/800/600"],
     videos: ["vP9X2V9c3Uw"],
     purchaseLink: "#"
+  ,
+    shortDescription: "Hydrating serum that brightens skin tone."
   },
   {
     id: 8,
@@ -159,6 +174,8 @@ export const products: Product[] = [
     videos: ["vP9X2V9c3Uw"],
     purchaseLink: "#",
     featured : true
+  ,
+    shortDescription: "Silky coverage that blends seamlessly."
   },
   {
     id: 9,
@@ -173,6 +190,8 @@ export const products: Product[] = [
     gallery: ["https://picsum.photos/seed/laf3ut2u/800/600"],
     videos: ["vP9X2V9c3Uw"],
     purchaseLink: "#"
+  ,
+    shortDescription: "Precision tool for effortless curling."
   },
   {
     id: 10,
@@ -187,6 +206,8 @@ export const products: Product[] = [
     gallery: ["https://picsum.photos/seed/koszir86/800/600","https://picsum.photos/seed/blf9bolx/800/600"],
     videos: ["vP9X2V9c3Uw"],
     purchaseLink: "#"
+  ,
+    shortDescription: "Tames and sets brows with a natural finish."
   },
   {
     id: 11,
@@ -202,6 +223,8 @@ export const products: Product[] = [
     gallery: ["https://picsum.photos/seed/xn86y5ok/800/600"],
     videos: ["vP9X2V9c3Uw"],
     purchaseLink: "#"
+  ,
+    shortDescription: "Soft, buildable blush for a natural flush."
   },
   {
     id: 12,
@@ -215,5 +238,7 @@ export const products: Product[] = [
     gallery: ["https://picsum.photos/seed/eky72tg1/800/600"],
     videos: ["vP9X2V9c3Uw"],
     purchaseLink: "#"
+  ,
+    shortDescription: "Warm matte bronzer for subtle sculpting."
   },
 ];

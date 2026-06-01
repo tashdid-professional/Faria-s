@@ -152,7 +152,7 @@ export default function ProductCard({ product }: ProductCardProps) {
                 </div>
                 <div className="w-12 h-px bg-[#d4b1a4] mb-4 md:mb-6" />
                 <p className="text-gray-600 text-sm md:text-[15px] leading-relaxed font-light mb-6 md:mb-8 italic">
-                  Take a closer look at our {product.name.toLowerCase()}. This elegant piece from our {product.category.toLowerCase()} collection is designed for those who appreciate refined beauty and exceptional quality.
+                  {product.shortDescription}
                 </p>
               </div>
 

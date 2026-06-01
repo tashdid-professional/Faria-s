@@ -14,6 +14,7 @@ export interface Product {
   image: string;
   badge?: "Sale" | "New";
   description: string;
+  shortDescription?: string;
   slug: string;
   tags: string[];
   gallery: string[];

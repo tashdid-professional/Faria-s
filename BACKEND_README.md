@@ -30,6 +30,7 @@ Refer to the `Product` interface.
 | `image` | String | Primary image URL (Absolute path recommended) |
 | `badge` | Enum? | 'Sale' or 'New' |
 | `description`| Text | Product description |
+| `shortDescription` | String? | Brief summary for product cards and previews |
 | `slug` | String | Unique URL-friendly identifier |
 | `tags` | JSON Array | List of strings |
 | `gallery` | JSON Array | List of image URLs |

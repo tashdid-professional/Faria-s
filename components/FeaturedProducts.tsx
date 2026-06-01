@@ -34,6 +34,7 @@ export default function FeaturedProductsSection() {
 
   // Get unique categories that HAVE featured products
   const categories = useMemo(() => {
+    if (products.length === 0) return [];
     const featuredUnique = Array.from(new Set(
       products.filter(p => p.featured).map((p) => p.category)
     ));
