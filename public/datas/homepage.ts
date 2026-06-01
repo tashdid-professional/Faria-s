@@ -10,7 +10,8 @@ export const bannerData = [
     description: "Rhoncus urna neque viverra justo nec ultrices dui sapien. Turpis massa sed elementum tempus egestas. Volutpat ac tincidunt vitae.",
     buttonText: "BROWSE COLLECTION",
     buttonLink: "/shop/foundation",
-    backgroundImage: "https://images.unsplash.com/photo-1596462502278-27bfdc4033c8?q=80&w=2080&auto=format&fit=crop",
+    backgroundImage: "https://picsum.photos/seed/g83grte0/800/600",
+    mobileBackgroundImage: "https://picsum.photos/seed/mobile1/600/800",
   },
   {
     id: 2,
@@ -19,7 +20,8 @@ export const bannerData = [
     description: "Discover our new range of organic products designed to nourish your skin and protect the environment.",
     buttonText: "SHOP NOW",
     buttonLink: "/shop",
-    backgroundImage: "https://images.unsplash.com/photo-1556228720-195a672e8a03?q=80&w=2070&auto=format&fit=crop",
+    backgroundImage: "https://picsum.photos/seed/1w06xnfe/800/600",
+    mobileBackgroundImage: "https://picsum.photos/seed/mobile2/600/800",
   },
   {
     id: 3,
@@ -28,7 +30,8 @@ export const bannerData = [
     description: "Experience the ultimate hydration with our new mineral-infused serums and moisturizers.",
     buttonText: "EXPLORE MORE",
     buttonLink: "/shop",
-    backgroundImage: "https://images.unsplash.com/photo-1612817288484-6f916006741a?q=80&w=2070&auto=format&fit=crop",
+    backgroundImage: "https://picsum.photos/seed/4t9e8crf/800/600",
+    mobileBackgroundImage: "https://picsum.photos/seed/mobile3/600/800",
   },
 ];
 
@@ -76,8 +79,8 @@ export const footerData = {
 export const whatWeDoData = {
   subtitle: "WHAT WE DO",
   title: "We Make Multi-Purpose Complexion Boosting Skin-Loving Products",
-  leftImage: "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?q=80&w=2070&auto=format&fit=crop",
-  rightImage: "https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?q=80&w=2070&auto=format&fit=crop",
+  leftImage: "https://picsum.photos/seed/hmqp6o1q/800/600",
+  rightImage: "https://picsum.photos/seed/m8xo0c3r/800/600",
   testimonial: {
     text: "Nulla interdum sem sed nunc finibus maximus. Vivamus purus mauris, placerat sit amet bibendum sit amet, facilisis eu dui. Phasellus placerat maxius arcu. Vestibulum interdum.",
     author: "FRANKIE ADEN",
@@ -102,32 +105,32 @@ export const instagramData = {
   images: [
     {
       id: 1,
-      url: "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?q=80&w=800&auto=format&fit=crop",
+      url: "https://picsum.photos/seed/v7mk8xry/800/600",
       link: "https://instagram.com",
     },
     {
       id: 2,
-      url: "https://images.unsplash.com/photo-1556228720-195a672e8a03?q=80&w=800&auto=format&fit=crop",
+      url: "https://picsum.photos/seed/5u5499n6/800/600",
       link: "https://instagram.com",
     },
     {
       id: 3,
-      url: "https://images.unsplash.com/photo-1612817288484-6f916006741a?q=80&w=800&auto=format&fit=crop",
+      url: "https://picsum.photos/seed/acbgq5cp/800/600",
       link: "https://instagram.com",
     },
     {
       id: 4,
-      url: "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?q=80&w=800&auto=format&fit=crop",
+      url: "https://picsum.photos/seed/xmvbggm5/800/600",
       link: "https://instagram.com",
     },
     {
       id: 5,
-      url: "https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?q=80&w=800&auto=format&fit=crop",
+      url: "https://picsum.photos/seed/7bn82cpc/800/600",
       link: "https://instagram.com",
     },
     {
       id: 6,
-      url: "https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?q=80&w=800&auto=format&fit=crop",
+      url: "https://picsum.photos/seed/ksz4gzlk/800/600",
       link: "https://instagram.com",
     },
   ],
@@ -136,13 +139,13 @@ export const shopHeader = {
   title: "Shop Our Collection",
   description: "Discover our premium range of beauty products designed to enhance your natural radiance. From sustainable skincare to high-pigment cosmetics.",
   breadcrumb: "Shop Collection",
-  image: "https://images.unsplash.com/photo-1596462502278-27bfdc4033c8?q=80&w=2080&auto=format&fit=crop",
+  image: "https://picsum.photos/seed/79auy27r/800/600",
 };
 
 export const faqData = {
   subtitle: "OUR EXPERTS ANSWER",
   title: "Faq For Cosmetic Products",
-  image: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=2070&auto=format&fit=crop",
+  image: "https://picsum.photos/seed/p3nmrfin/800/600",
   faqs: [
     {
       id: 1,

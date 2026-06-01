@@ -1,12 +1,30 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { instagramData } from "@/public/datas/homepage";
+import { getInstagramData } from "@/src/services/api";
+import { InstagramData } from "@/src/types";
 import { motion } from "framer-motion";
 
 export default function InstagramFeed() {
-  const { subtitle, title, images } = instagramData;
+  const [data, setData] = useState<InstagramData | null>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const instagramData = await getInstagramData();
+        setData(instagramData);
+      } catch (error) {
+        console.error("Error fetching instagram data:", error);
+      }
+    };
+    fetchData();
+  }, []);
+
+  if (!data) return null;
+
+  const { subtitle, title, images } = data;
 
   // Double the images for a seamless loop
   const displayImages = [...images, ...images];

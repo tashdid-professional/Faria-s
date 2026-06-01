@@ -1,10 +1,26 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import { blogs } from "@/public/datas/blogs";
+import { getBlogs } from "@/src/services/api";
+import { Blog } from "@/src/types";
 import { motion } from "framer-motion";
 
 export default function FeaturedBlogs() {
+  const [blogs, setBlogs] = useState<Blog[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const blogsData = await getBlogs();
+        setBlogs(blogsData);
+      } catch (error) {
+        console.error("Error fetching blogs:", error);
+      }
+    };
+    fetchData();
+  }, []);
+
   // Get 3 featured blogs
   const featured = blogs.filter(blog => blog.isFeatured).slice(0, 3);
 

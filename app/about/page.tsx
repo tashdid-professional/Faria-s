@@ -1,15 +1,35 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { aboutData } from "@/public/datas/about";
+import { getAboutData } from "@/src/services/api";
+import { AboutData } from "@/src/types";
 import { Beaker, ShieldCheck, ClipboardCheck } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
 import ExperienceStats from "@/components/ExperienceStats";
 import FeaturedBlogs from "@/components/FeaturedBlogs";
-import * as motion from "framer-motion/client";
+import { motion } from "framer-motion";
 
 export default function AboutPage() {
+  const [aboutData, setAboutData] = useState<AboutData | null>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await getAboutData();
+        setAboutData(data);
+      } catch (error) {
+        console.error("Error fetching about data:", error);
+      }
+    };
+    fetchData();
+  }, []);
+
+  if (!aboutData) return null;
+
   const { header, content } = aboutData;
 
   const getIcon = (iconName: string) => {

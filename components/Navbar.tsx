@@ -4,11 +4,15 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
-import { navLinks, socialLinks, topBarData } from "@/public/datas/homepage";
+import { getNavLinks, getTopBarData, getSocialLinks } from "@/src/services/api";
+import { NavLink, TopBarData, SocialLinks } from "@/src/types";
 import { Search, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function Navbar() {
+  const [navLinks, setNavLinks] = useState<NavLink[]>([]);
+  const [socialLinks, setSocialLinks] = useState<SocialLinks | null>(null);
+  const [topBarData, setTopBarData] = useState<TopBarData | null>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -27,6 +31,22 @@ export default function Navbar() {
   };
 
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [links, topBar, socials] = await Promise.all([
+          getNavLinks(),
+          getTopBarData(),
+          getSocialLinks()
+        ]);
+        setNavLinks(links);
+        setTopBarData(topBar);
+        setSocialLinks(socials);
+      } catch (error) {
+        console.error("Error fetching navbar data:", error);
+      }
+    };
+    fetchData();
+
     const handleScroll = () => {
       if (window.scrollY > 50) {
         setIsScrolled(true);
@@ -86,7 +106,7 @@ export default function Navbar() {
       </AnimatePresence>
 
       {/* Top Bar - Homepage PC only (Not sticky) */}
-      {isHomePage && (
+      {isHomePage && topBarData && (
         <div className="hidden lg:block bg-[#ECDEC2] py-2 text-center relative z-[60]">
           <p className="text-[11px] font-medium tracking-[0.2em] text-black uppercase font-lato">
             {topBarData.text}
@@ -220,19 +240,21 @@ export default function Navbar() {
         ))}
 
         {/* Mobile Socials */}
-        <div className={`flex space-x-6 pt-8 transition-all duration-700 delay-500 ${
-          isOpen ? "opacity-100" : "opacity-0"
-        }`}>
-          <Link href={socialLinks.facebook} target="_blank" className="w-10 h-10 rounded-full border border-black/10 flex items-center justify-center hover:bg-black hover:text-white transition-colors">
-            <span className="text-[10px] font-bold">FB</span>
-          </Link>
-          <Link href={socialLinks.instagram} target="_blank" className="w-10 h-10 rounded-full border border-black/10 flex items-center justify-center hover:bg-black hover:text-white transition-colors">
-            <span className="text-[10px] font-bold">IG</span>
-          </Link>
-          <Link href={socialLinks.tiktok} target="_blank" className="w-10 h-10 rounded-full border border-black/10 flex items-center justify-center hover:bg-black hover:text-white transition-colors">
-            <span className="text-[10px] font-bold">TK</span>
-          </Link>
-        </div>
+        {socialLinks && (
+          <div className={`flex space-x-6 pt-8 transition-all duration-700 delay-500 ${
+            isOpen ? "opacity-100" : "opacity-0"
+          }`}>
+            <Link href={socialLinks.facebook} target="_blank" className="w-10 h-10 rounded-full border border-black/10 flex items-center justify-center hover:bg-black hover:text-white transition-colors">
+              <span className="text-[10px] font-bold">FB</span>
+            </Link>
+            <Link href={socialLinks.instagram} target="_blank" className="w-10 h-10 rounded-full border border-black/10 flex items-center justify-center hover:bg-black hover:text-white transition-colors">
+              <span className="text-[10px] font-bold">IG</span>
+            </Link>
+            <Link href={socialLinks.tiktok} target="_blank" className="w-10 h-10 rounded-full border border-black/10 flex items-center justify-center hover:bg-black hover:text-white transition-colors">
+              <span className="text-[10px] font-bold">TK</span>
+            </Link>
+          </div>
+        )}
       </div>
     </header>
     </>

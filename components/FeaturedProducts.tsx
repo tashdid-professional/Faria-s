@@ -1,9 +1,10 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { products } from "@/public/datas/products";
+import { getProducts } from "@/src/services/api";
+import { Product } from "@/src/types";
 import ProductCard from "./ProductCard";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -14,17 +15,51 @@ const fixImagePath = (src: string) => {
 };
 
 export default function FeaturedProductsSection() {
-  // Get unique categories and add "All" at the beginning
-  const categories = useMemo(() => {
-    const unique = Array.from(new Set(products.map((p) => p.category)));
-    return unique.length > 0 ? unique : ["Uncategorized"];
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const data = await getProducts();
+        setProducts(data);
+      } catch (error) {
+        console.error("Error fetching featured products:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchProducts();
   }, []);
 
-  const [activeCategory, setActiveCategory] = useState(categories[0]);
+  // Get unique categories that HAVE featured products
+  const categories = useMemo(() => {
+    const featuredUnique = Array.from(new Set(
+      products.filter(p => p.featured).map((p) => p.category)
+    ));
+    return featuredUnique.length > 0 ? featuredUnique : ["Uncategorized"];
+  }, [products]);
+
+  const [activeCategory, setActiveCategory] = useState("");
+
+  // Set initial category once products are loaded
+  useEffect(() => {
+    if (categories.length > 0 && !activeCategory) {
+      setActiveCategory(categories[0]);
+    }
+  }, [categories, activeCategory]);
 
   const filteredProducts = useMemo(() => {
-    return products.filter((p) => p.category === activeCategory).slice(0, 4);
-  }, [activeCategory]);
+    return products
+      .filter((p) => p.featured && p.category === activeCategory)
+      .slice(0, 4);
+  }, [activeCategory, products]);
+
+  if (loading) return (
+    <div className="py-24 bg-[#F2E9D4] text-center">
+      <div className="animate-pulse">Loading Featured Products...</div>
+    </div>
+  );
 
   return (
     <section className="py-24  bg-[#F2E9D4]">

@@ -1,35 +1,103 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 
 import ProductCard from "@/components/ProductCard";
-import { products } from "@/public/datas/products";
-import { shopHeader } from "@/public/datas/homepage";
+import { getProductBySlug, getProducts } from "@/src/services/api";
+import { Product, ProductVariant } from "@/src/types";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function ProductDetailsPage() {
   const { slug } = useParams();
-  const product = products.find((p) => p.slug === slug);
+  const [product, setProduct] = useState<Product | null>(null);
+  const [allProducts, setAllProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+  
   const [activeTab, setActiveTab] = useState("description");
-  const [selectedVariant, setSelectedVariant] = useState(product?.variants?.[0] || null);
-  const [mainImage, setMainImage] = useState(product?.image || "");
+  const [selectedVariant, setSelectedVariant] = useState<ProductVariant | null>(null);
+  const [mainImage, setMainImage] = useState("");
 
-  // Update image when product or variant changes
-  React.useEffect(() => {
-    if (product) {
-      if (selectedVariant) {
-        setMainImage(selectedVariant.image);
-      } else {
-        setMainImage(product.image);
+  // Fetch product data
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        const [fetchedProduct, fetchedAll] = await Promise.all([
+          getProductBySlug(slug as string),
+          getProducts()
+        ]);
+        
+        if (fetchedProduct) {
+          setProduct(fetchedProduct);
+          setMainImage(fetchedProduct.image);
+          if (fetchedProduct.variants && fetchedProduct.variants.length > 0) {
+            setSelectedVariant(fetchedProduct.variants[0]);
+            setMainImage(fetchedProduct.variants[0].image);
+          }
+        }
+        setAllProducts(fetchedAll);
+      } catch (error) {
+        console.error("Error fetching product:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, [slug]);
+
+  // Update image when variant changes
+  useEffect(() => {
+    if (selectedVariant) {
+      setMainImage(selectedVariant.image);
+    }
+  }, [selectedVariant]);
+
+  const relatedProducts = useMemo(() => {
+    if (!product) return [];
+    const others = allProducts.filter((p) => p.id !== product.id);
+    const result: Product[] = [];
+    const seenCategories = new Set<string>();
+
+    for (const p of others) {
+      if (!seenCategories.has(p.category)) {
+        result.push(p);
+        seenCategories.add(p.category);
+      }
+      if (result.length === 4) break;
+    }
+
+    if (result.length < 4) {
+      for (const p of others) {
+        if (!result.find((r) => r.id === p.id)) {
+          result.push(p);
+        }
+        if (result.length === 4) break;
       }
     }
-  }, [product, selectedVariant]);
+
+    return result;
+  }, [product, allProducts]);
+
+  if (loading) {
+    return (
+      <main className="min-h-screen bg-white">
+        <Navbar />
+        <div className="container mx-auto px-4 py-40 text-center">
+          <div className="animate-pulse space-y-4">
+            <div className="h-8 w-64 bg-gray-200 mx-auto rounded"></div>
+            <div className="h-4 w-48 bg-gray-100 mx-auto rounded"></div>
+          </div>
+        </div>
+        <Footer />
+      </main>
+    );
+  }
 
   if (!product) {
     return (
@@ -43,10 +111,6 @@ export default function ProductDetailsPage() {
       </main>
     );
   }
-
-  const relatedProducts = products
-    .filter((p) => p.category === product.category && p.id !== product.id)
-    .slice(0, 4);
 
   const activeGallery = selectedVariant ? selectedVariant.gallery : product.gallery;
 

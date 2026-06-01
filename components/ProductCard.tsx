@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Product } from "@/public/datas/products";
+import { Product } from "@/src/types";
 import { Eye, X } from "lucide-react";
 import { createPortal } from "react-dom";
 
@@ -143,11 +143,11 @@ export default function ProductCard({ product }: ProductCardProps) {
                 <div className="flex items-center gap-3 mb-4 md:mb-6">
                   {product.oldPrice && (
                     <span className="text-lg md:text-xl text-gray-400 line-through font-dm-sans">
-                      £{product.oldPrice.toFixed(2)}
+                      <span className="font-serif">৳</span> {product.oldPrice.toFixed(2)}
                     </span>
                   )}
                   <span className="text-xl md:text-2xl text-[#1a1a1a] font-dm-sans">
-                    £{product.price.toFixed(2)}
+                    <span className="font-serif">৳</span> {product.price.toFixed(2)}
                   </span>
                 </div>
                 <div className="w-12 h-px bg-[#d4b1a4] mb-4 md:mb-6" />

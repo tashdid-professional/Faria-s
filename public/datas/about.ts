@@ -32,6 +32,6 @@ export const aboutData = {
     ],
     buttonText: "READ MORE",
     buttonLink: "/shop",
-    mainImage: "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?q=80&w=800&auto=format&fit=crop",
+    mainImage: "https://picsum.photos/seed/0zpskxrk/800/600",
   },
 };

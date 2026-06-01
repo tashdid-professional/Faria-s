@@ -1,10 +1,28 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Image from "next/image";
-import { whatWeDoData } from "@/public/datas/homepage";
+import { getWhatWeDoData } from "@/src/services/api";
+import { WhatWeDoData } from "@/src/types";
 import { motion } from "framer-motion";
 
 export default function WhatWeDo() {
+  const [whatWeDoData, setWhatWeDoData] = useState<WhatWeDoData | null>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await getWhatWeDoData();
+        setWhatWeDoData(data);
+      } catch (error) {
+        console.error("Error fetching what we do data:", error);
+      }
+    };
+    fetchData();
+  }, []);
+
+  if (!whatWeDoData) return null;
+
   const { subtitle, title, leftImage, rightImage, testimonial } = whatWeDoData;
 
   const fadeInUp = {

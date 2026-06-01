@@ -1,21 +1,37 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
-import { faqData } from "@/public/datas/homepage";
+import { getFaqData } from "@/src/services/api";
+import { FaqData } from "@/src/types";
 import { motion, AnimatePresence } from "framer-motion";
 import InstagramFeed from "@/components/InstagramFeed";
 
 export default function FAQPage() {
+  const [data, setData] = useState<FaqData | null>(null);
   const [openId, setOpenId] = useState<number | null>(1);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const faqData = await getFaqData();
+        setData(faqData);
+      } catch (error) {
+        console.error("Error fetching faq data:", error);
+      }
+    };
+    fetchData();
+  }, []);
 
   const toggleFaq = (id: number) => {
     setOpenId(openId === id ? null : id);
   };
+
+  if (!data) return null;
 
   return (
     <main className="min-h-screen bg-white">
@@ -65,15 +81,15 @@ export default function FAQPage() {
             >
               <div className="space-y-6">
                 <p className="text-[12px] lg:text-[16px] tracking-[0.23em] text-[#202020] font-lato uppercase">
-                  {faqData.subtitle}
+                  {data.subtitle}
                 </p>
                 <h2 className="text-4xl lg:text-[43px] font-bold font-outfit text-black leading-[1.1]">
-                  {faqData.title}
+                  {data.title}
                 </h2>
               </div>
 
               <div className="space-y-0">
-                {faqData.faqs.map((faq, index) => (
+                {data.faqs.map((faq, index) => (
                   <motion.div 
                     key={faq.id} 
                     initial={{ opacity: 0, y: 20 }}
@@ -126,7 +142,7 @@ export default function FAQPage() {
             >
               <div className="relative aspect-[4/5] lg:aspect-auto lg:h-[700px] w-full overflow-hidden shadow-2xl">
                 <Image
-                  src={faqData.image}
+                  src={data.image}
                   alt="FAQ Image"
                   fill
                   className="object-cover"

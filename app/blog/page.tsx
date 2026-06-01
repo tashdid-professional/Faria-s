@@ -1,18 +1,32 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ChevronRight, ChevronLeft } from "lucide-react";
-import { blogs } from "@/public/datas/blogs";
+import { getBlogs } from "@/src/services/api";
+import { Blog } from "@/src/types";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
 import { motion } from "framer-motion";
 
 export default function BlogPage() {
+  const [blogs, setBlogs] = useState<Blog[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const blogsPerPage = 10;
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const blogsData = await getBlogs();
+        setBlogs(blogsData);
+      } catch (error) {
+        console.error("Error fetching blogs:", error);
+      }
+    };
+    fetchData();
+  }, []);
 
   // Pagination logic
   const totalPages = Math.ceil(blogs.length / blogsPerPage);

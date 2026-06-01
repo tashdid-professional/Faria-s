@@ -1,12 +1,12 @@
 ﻿"use client";
 
-import React, { useState, Suspense } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ChevronRight, LayoutGrid, List, ChevronDown, Plus, ChevronLeft, X } from "lucide-react";
-import { products } from "@/public/datas/products";
+import { getProducts, getShopHeader } from "@/src/services/api";
+import { Product, ShopHeader } from "@/src/types";
 import ProductCard from "@/components/ProductCard";
-import { shopHeader } from "@/public/datas/homepage";
 import { useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import Navbar from "@/components/Navbar";
@@ -18,11 +18,30 @@ function ShopContent() {
   const searchBarQuery = searchParams.get("search") || "";
   const categoryParam = searchParams.get("category");
   
+  const [products, setProducts] = useState<Product[]>([]);
+  const [shopHeader, setShopHeader] = useState<ShopHeader | null>(null);
   const [viewType, setViewType] = useState<"grid" | "list">("grid");
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(categoryParam);
   const [sortOrder, setSortOrder] = useState<string>("a-z");
   const [searchQuery, setSearchQuery] = useState(searchBarQuery);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [productsData, headerData] = await Promise.all([
+          getProducts(),
+          getShopHeader()
+        ]);
+        setProducts(productsData);
+        setShopHeader(headerData);
+      } catch (error) {
+        console.error("Error fetching shop data:", error);
+      }
+    };
+    fetchData();
+  }, []);
 
   // Sync state with URL parameter if it changes
   React.useEffect(() => {
@@ -31,7 +50,6 @@ function ShopContent() {
     setCurrentPage(1);
   }, [categoryParam, searchBarQuery]);
   
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const productsPerPage = 9; // 3 rows * 3 columns on desktop
   // Filter products by search and category
   const filteredProducts = products.filter(p => {
@@ -96,6 +114,8 @@ function ShopContent() {
   }));
 
   const bannerCategories = ["Face", "Hair Styling", "Lips", "Skincare"];
+
+  if (!shopHeader) return null;
 
   return (
     <main className="bg-white min-h-screen">

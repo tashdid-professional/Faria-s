@@ -2,26 +2,47 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { bannerData } from "@/public/datas/homepage";
+import { getBannerData } from "@/src/services/api";
+import { BannerItem } from "@/src/types";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function Banner() {
+  const [bannerData, setBannerData] = useState<BannerItem[]>([]);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [direction, setDirection] = useState(1); // 1 for right-to-left, -1 for left-to-right
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchBanner = async () => {
+      try {
+        const data = await getBannerData();
+        setBannerData(data);
+      } catch (error) {
+        console.error("Error fetching banner:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchBanner();
+  }, []);
 
   const paginate = (newIndex: number) => {
+    if (bannerData.length === 0) return;
     setDirection(newIndex > currentSlide ? 1 : -1);
     setCurrentSlide(newIndex);
   };
 
   useEffect(() => {
+    if (bannerData.length === 0) return;
     const timer = setInterval(() => {
       // Toggle direction each time for alternating "one from right, another from left" effect
       setDirection(currentSlide % 2 === 0 ? 1 : -1);
       setCurrentSlide((prev) => (prev + 1) % bannerData.length);
     }, 6000); // Change slide every 6 seconds
     return () => clearInterval(timer);
-  }, [currentSlide]);
+  }, [currentSlide, bannerData.length]);
+
+  if (loading || !bannerData.length) return <div className="h-[120vh] bg-[#FCF7EE] animate-pulse" />;
 
   const variants = {
     enter: (direction: number) => ({
@@ -55,11 +76,28 @@ export default function Banner() {
           }}
           className="absolute inset-0"
           style={{
-            backgroundImage: `url(${bannerData[currentSlide].backgroundImage})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
         >
+          {/* Background Image with Responsive logic */}
+          <div 
+            className="absolute inset-0 block md:hidden"
+            style={{
+              backgroundImage: `url(${bannerData[currentSlide].mobileBackgroundImage || bannerData[currentSlide].backgroundImage})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+          />
+          <div 
+            className="absolute inset-0 hidden md:block"
+            style={{
+              backgroundImage: `url(${bannerData[currentSlide].backgroundImage})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+          />
+          
           {/* Overlay for better text readability if needed */}
           <div className="absolute inset-0 bg-black/5" />
 
@@ -120,3 +158,4 @@ export default function Banner() {
     </div>
   );
 }
+

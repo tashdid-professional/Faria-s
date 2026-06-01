@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
-import { statsData } from "@/public/datas/homepage";
+import { getStatsData } from "@/src/services/api";
+import { StatsData } from "@/src/types";
 import { motion } from "framer-motion";
 
 function CountUp({ end, duration = 2000, suffix = "" }: { end: number; duration?: number; suffix?: string }) {
@@ -51,6 +52,22 @@ function CountUp({ end, duration = 2000, suffix = "" }: { end: number; duration?
 }
 
 export default function ExperienceStats() {
+  const [statsData, setStatsData] = useState<StatsData | null>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await getStatsData();
+        setStatsData(data);
+      } catch (error) {
+        console.error("Error fetching stats data:", error);
+      }
+    };
+    fetchData();
+  }, []);
+
+  if (!statsData) return null;
+
   const { subtitle, title, description, stats } = statsData;
 
   return (

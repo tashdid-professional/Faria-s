@@ -1,10 +1,28 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { footerData } from "@/public/datas/homepage";
+import { getFooterData } from "@/src/services/api";
+import { FooterData } from "@/src/types";
 
 export default function Footer() {
+  const [footerData, setFooterData] = useState<FooterData | null>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await getFooterData();
+        setFooterData(data);
+      } catch (error) {
+        console.error("Error fetching footer data:", error);
+      }
+    };
+    fetchData();
+  }, []);
+
+  if (!footerData) return null;
+
   const { contact, socials, center, newsletter } = footerData;
 
   return (

@@ -23,7 +23,7 @@ export const blogs: Blog[] = [
     title: "THE COSMETICS WORLD",
     excerpt: "Est diam debitis an, error recusabo id pro, quo eripuit civibus ut. Mel ut tamquam erroribus, ad nonumy vituperata mei.Et ...",
     description: "Lorem ipsum dolor sit amet, odio legere cotidieque ex quo, an noster evertitur vel, ei solet democritum est. Id mel tibique ancillae convenire. Admodum tacimates maiestatis his id. Sed everti accusamus facilisi ne. Est diam debitis an, error recusabo id pro, quo eripuit civibus ut. Mel ut tamquam erroribus, ad nonumy vituperata mei. Et qui falli latine consequuntur. In appellantur concludaturque pro. Commune scriptorem ad pri, ut euripidis posidonium has. Eum ei verear dolorum. Duo quas viris delenit cu, dolores inciderint scribentur mel in. Option elaboraret et mea, sea eligendi insolens scripserit et, tantas assueverit liberavisse vim at. Prima modus erroribus id cum, te mea munere doming equidem. At per ullum facilisis. Lorem ipsum dolor sit amet, ceteros temporibus mei ad, eum Mel purto adipisci eu, ex eum nisl consul, has virtute inermis ne. Eripxit delicatissimi in eos. Pri ut congue dolorem. Impetus consequat in qui, pro posse bonorum delicatissimi ad, veri voluptatibus ei qui. Munere accusamus ex has, pri vero populo voluptaria eum no, eos atomoru.",
-    image: "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?q=80&w=2070&auto=format&fit=crop",
+    image: "https://picsum.photos/seed/82f1f49m/800/600",
     isFeatured: true,
   },
   {
@@ -36,7 +36,7 @@ export const blogs: Blog[] = [
     title: "PREP A GOOD PRIMER",
     excerpt: "Est diam debitis an, error recusabo id pro, quo eripuit civibus ut. Mel ut tamquam erroribus, ad nonumy vituperata mei.Et ...",
     description: "Est diam debitis an, error recusabo id pro, quo eripuit civibus ut. Mel ut tamquam erroribus, ad nonumy vituperata mei. Et qui falli latine consequuntur. In appellantur concludaturque pro. Commune scriptorem ad pri, ut euripidis posidonium has. Eum ei verear dolorum. Duo quas viris delenit cu, dolores inciderint scribentur mel in. Option elaboraret et mea, sea eligendi insolens scripserit et, tantas assueverit liberavisse vim at. Prima modus erroribus id cum, te mea munere doming equidem. At per ullum facilisis. Lorem ipsum dolor sit amet, ceteros temporibus mei ad, eum Mel purto adipisci eu, ex eum nisl consul, has virtute inermis ne. Eripxit delicatissimi in eos. Pri ut congue dolorem. Impetus consequat in qui, pro posse bonorum delicatissimi ad, veri voluptatibus ei qui. Munere accusamus ex has, pri vero populo voluptaria eum no, eos atomoru.",
-    image: "https://images.unsplash.com/photo-1599733594230-6b823276abcc?q=80&w=2070&auto=format&fit=crop",
+    image: "https://picsum.photos/seed/4tj9wi41/800/600",
     isFeatured: true,
   },
   {
@@ -49,7 +49,7 @@ export const blogs: Blog[] = [
     title: "KNOW HOW TO APPLY IT",
     excerpt: "Est diam debitis an, error recusabo id pro, quo eripuit civibus ut. Mel ut tamquam erroribus, ad nonumy vituperata mei.Et ...",
     description: "Est diam debitis an, error recusabo id pro, quo eripuit civibus ut. Mel ut tamquam erroribus, ad nonumy vituperata mei. Et qui falli latine consequuntur. In appellantur concludaturque pro. Commune scriptorem ad pri, ut euripidis posidonium has. Eum ei verear dolorum. Duo quas viris delenit cu, dolores inciderint scribentur mel in. Option elaboraret et mea, sea eligendi insolens scripserit et, tantas assueverit liberavisse vim at. Prima modus erroribus id cum, te mea munere doming equidem. At per ullum facilisis. Lorem ipsum dolor sit amet, ceteros temporibus mei ad, eum Mel purto adipisci eu, ex eum nisl consul, has virtute inermis ne. Eripxit delicatissimi in eos. Pri ut congue dolorem. Impetus consequat in qui, pro posse bonorum delicatissimi ad, veri voluptatibus ei qui. Munere accusamus ex has, pri vero populo voluptaria eum no, eos atomoru.",
-    image: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=2087&auto=format&fit=crop",
+    image: "https://picsum.photos/seed/z99e33lm/800/600",
   },
   {
     id: 4,
@@ -61,7 +61,7 @@ export const blogs: Blog[] = [
     title: "50 SHADES OF GREAT",
     excerpt: "Est diam debitis an, error recusabo id pro, quo eripuit civibus ut. Mel ut tamquam erroribus, ad nonumy vituperata mei.Et ...",
     description: "Est diam debitis an, error recusabo id pro, quo eripuit civibus ut. Mel ut tamquam erroribus, ad nonumy vituperata mei. Et qui falli latine consequuntur. In appellantur concludaturque pro. Commune scriptorem ad pri, ut euripidis posidonium has. Eum ei verear dolorum. Duo quas viris delenit cu, dolores inciderint scribentur mel in. Option elaboraret et mea, sea eligendi insolens scripserit et, tantas assueverit liberavisse vim at. Prima modus erroribus id cum, te mea munere doming equidem. At per ullum facilisis. Lorem ipsum dolor sit amet, ceteros temporibus mei ad, eum Mel purto adipisci eu, ex eum nisl consul, has virtute inermis ne. Eripxit delicatissimi in eos. Pri ut congue dolorem. Impetus consequat in qui, pro posse bonorum delicatissimi ad, veri voluptatibus ei qui. Munere accusamus ex has, pri vero populo voluptaria eum no, eos atomoru.",
-    image: "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?q=80&w=2070&auto=format&fit=crop",
+    image: "https://picsum.photos/seed/onagqz1o/800/600",
   },
   {
     id: 5,
@@ -73,7 +73,7 @@ export const blogs: Blog[] = [
     title: "SUMMER SKINCARE ROUTINE",
     excerpt: "Discover the essential steps to keep your skin glowing and protected during the hot summer months with our expert tips...",
     description: "As the temperature rises, your skin's needs change. This guide covers everything from lightweight hydration to the importance of SPF reapplication. We dive deep into the best ingredients for summer, such as Vitamin C for antioxidant protection and Hyaluronic Acid for oil-free moisture. Learn how to transition your heavy winter creams to breezy summer serums without losing that healthy glow. Our routine is designed for all skin types, focusing on maintaining a balanced barrier while dealing with increased sweat and sebum production.",
-    image: "https://images.pexels.com/photos/3785104/pexels-photo-3785104.jpeg",
+    image: "https://picsum.photos/seed/mknki1s1/800/600",
     isFeatured: true,
   },
   {
@@ -86,7 +86,7 @@ export const blogs: Blog[] = [
     title: "ART OF PERFECT EYELINER",
     excerpt: "Master the wing with our comprehensive guide to eyeliner techniques, from classic pencils to sharp liquid finishes...",
     description: "Whether you prefer a subtle tightline or a bold dramatic wing, mastering eyeliner is a fundamental skill for any makeup enthusiast. In this post, Marco V shares professional secrets for steadying your hand, choosing the right formula for your eye shape, and the absolute best tools for the job. We explore the history of the cat-eye and provide a step-by-step tutorial for three versatile looks that transition perfectly from day to night. Stop struggling with uneven lines and start creating art on your eyelids.",
-    image: "https://images.pexels.com/photos/3321416/pexels-photo-3321416.jpeg",
+    image: "https://picsum.photos/seed/5q4a1vlu/800/600",
   },
   {
     id: 7,
@@ -98,7 +98,7 @@ export const blogs: Blog[] = [
     title: "Premium feather-light, comfortable lipstick",
     excerpt: "Distinctively reconceptualize resource maximizing methodologies for enterprise strategic theme areas. Energistically revolutionize high standards in e-tailers without principle-centered scenarios. Efficiently evolve B2C solutions vis-a-vis...",
     description: "Experience the ultimate in lip comfort with our new feather-light formula. Designed for all-day wear without drying, this lipstick provides a rich pigment while feeling weightless on your lips. Perfect for both professional settings and casual outings.",
-    image: "https://images.unsplash.com/photo-1586771107445-d3ca88812690?q=80&w=2072&auto=format&fit=crop",
+    image: "https://picsum.photos/seed/1gt3578r/800/600",
   },
   {
     id: 8,
@@ -110,7 +110,7 @@ export const blogs: Blog[] = [
     title: "Long-lasting & quick dry nail polish set",
     excerpt: "Distinctively reconceptualize resource maximizing methodologies for enterprise strategic theme areas. Energistically revolutionize high standards in e-tailers without principle-centered scenarios. Efficiently evolve B2C solutions vis-a-vis...",
     description: "Our quick-dry nail polish set is a game-changer for those on the go. Get salon-quality results at home with a formula that stays chip-free for up to two weeks. Available in a variety of vibrant spring and summer shades.",
-    image: "https://images.unsplash.com/photo-1519014816548-bf5fe059798b?q=80&w=2070&auto=format&fit=crop",
+    image: "https://picsum.photos/seed/188dwwgg/800/600",
   },
   {
     id: 9,
@@ -122,7 +122,7 @@ export const blogs: Blog[] = [
     title: "How to get the perfect glow from within",
     excerpt: "Discover the secrets of internal hydration and the specific vitamins that help your skin shine from the inside out...",
     description: "Skin health starts deep within. In this article, we explore how diet, hydration, and supplements can transform your complexion more than any topical product. We speak with dermatologists to understand the link between gut health and skin clarity.",
-    image: "https://images.unsplash.com/photo-1612817288484-6f916006741a?q=80&w=2070&auto=format&fit=crop",
+    image: "https://picsum.photos/seed/nn7wh6ty/800/600",
   },
   {
     id: 10,
@@ -134,7 +134,7 @@ export const blogs: Blog[] = [
     title: "The future of sustainable beauty packaging",
     excerpt: "Why we are moving towards 100% recyclable materials and what it means for the beauty industry at large...",
     description: "Packaging waste is a major concern in the cosmetics world. Lily & Lavender is taking steps to ensure all our bottles and jars are made from post-consumer recycled plastic. Read about our journey towards a zero-waste future.",
-    image: "https://images.unsplash.com/photo-1556228578-8c7c2f13-68d?q=80&w=2070&auto=format&fit=crop",
+    image: "https://picsum.photos/seed/ukl5rrqc/800/600",
   },
   {
     id: 11,
@@ -146,7 +146,7 @@ export const blogs: Blog[] = [
     title: "Why organic ingredients actually matter",
     excerpt: "Breaking down the science behind organic vs synthetic ingredients in your daily skincare routine...",
     description: "Not all natural ingredients are created equal. We look at the certification process for organic farming and why these ingredients are often more potent and less irritating for sensitive skin. Join us as we visit our organic source farms.",
-    image: "https://images.unsplash.com/photo-1540555700478-4be289fbecee?q=80&w=2070&auto=format&fit=crop",
+    image: "https://picsum.photos/seed/39m82gpm/800/600",
   },
   {
     id: 12,
@@ -158,6 +158,6 @@ export const blogs: Blog[] = [
     title: "A 5-minute minimalist makeup routine",
     excerpt: "For the busy soul who wants to look put together without spending hours in front of the mirror every morning...",
     description: "Less is more. We demonstrate how just four multi-purpose products can create a full, polished look. Perfect for travel, gym, or just a lazy Sunday morning. Focus on enhancing your natural features efficiently.",
-    image: "https://images.unsplash.com/photo-1596462502278-27bfdc4033c8?q=80&w=2080&auto=format&fit=crop",
+    image: "https://picsum.photos/seed/qlieu4my/800/600",
   },
 ];

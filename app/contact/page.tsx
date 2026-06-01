@@ -1,15 +1,17 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { MapPin, Phone, Mail } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
-import { contactContent } from "@/public/datas/contact";
+import { getContactData } from "@/src/services/api";
+import { ContactData } from "@/src/types";
 import { motion } from "framer-motion";
 
 export default function ContactPage() {
+  const [data, setData] = useState<ContactData | null>(null);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -17,6 +19,18 @@ export default function ContactPage() {
     mobile: "",
     message: ""
   });
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const contactData = await getContactData();
+        setData(contactData);
+      } catch (error) {
+        console.error("Error fetching contact data:", error);
+      }
+    };
+    fetchData();
+  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -31,6 +45,8 @@ export default function ContactPage() {
     setFormData({ firstName: "", lastName: "", email: "", mobile: "", message: "" });
   };
 
+  if (!data) return null;
+
   return (
     <main className="bg-white min-h-screen">
       <Navbar />
@@ -44,7 +60,7 @@ export default function ContactPage() {
           className="relative z-10 text-center pt-20"
         >
           <h1 className="text-6xl md:text-[60px] font-bold font-outfit text-black mb-4">
-            {contactContent.header.title}
+            {data.header.title}
           </h1>
           <nav className="flex items-center justify-center space-x-3 text-[12px] font-bold tracking-[0.2em] text-black uppercase font-lato">
             <Link href="/" className="hover:text-[#b6713e] transition-colors">HOME</Link>
@@ -65,10 +81,10 @@ export default function ContactPage() {
             className="text-center mb-12"
           >
             <span className="text-[16px]  tracking-[0.23em] text-[#202020] uppercase font-lato block mb-2">
-              {contactContent.branch.subtitle}
+              {data.branch.subtitle}
             </span>
             <h2 className="text-4xl md:text-[43px] font-medium font-outfit text-black">
-              {contactContent.branch.title}
+              {data.branch.title}
             </h2>
           </motion.div>
 
@@ -85,7 +101,7 @@ export default function ContactPage() {
                   <MapPin className="text-black" size={24} />
                 </div>
                 <p className=" leading-relaxed  text-black max-w-[380px]">
-                  {contactContent.branch.info.address}
+                  {data.branch.info.address}
                 </p>
               </div>
 
@@ -94,7 +110,7 @@ export default function ContactPage() {
                   <Phone className="text-black" size={24} />
                 </div>
                 <p className=" leading-relaxed  text-black">
-                  {contactContent.branch.info.phone}
+                  {data.branch.info.phone}
                 </p>
               </div>
 
@@ -103,7 +119,7 @@ export default function ContactPage() {
                   <Mail className="text-black" size={24} />
                 </div>
                 <p className=" leading-relaxed  text-black">
-                  {contactContent.branch.info.email}
+                  {data.branch.info.email}
                 </p>
               </div>
             </div>
@@ -117,7 +133,7 @@ export default function ContactPage() {
             className="mt-10 text-center max-w-2xl mx-auto"
           >
             <p className="text-[#202020] leading-loose  font-lato">
-              {contactContent.branch.description}
+              {data.branch.description}
             </p>
             <button className="mt-6 px-10 py-4 bg-[#EBD9C1] text-black font-medium text-[12px] tracking-[0.2em] uppercase hover:bg-black hover:text-white transition-all duration-300">
               Get In Touch
@@ -136,7 +152,7 @@ export default function ContactPage() {
           className="container mx-auto"
         >
           <h2 className="text-[32px] font-medium font-outfit mb-12 text-black">
-            {contactContent.form.title}
+            {data.form.title}
           </h2>
 
           <form onSubmit={handleSubmit} className="grid grid-cols-1 lg:grid-cols-12 gap-8">
@@ -198,7 +214,7 @@ export default function ContactPage() {
                 type="submit"
                 className="w-full py-6 bg-[#EBD9C1] text-black font-bold text-[12px] tracking-[0.2em] uppercase hover:bg-black hover:text-white transition-all duration-300"
               >
-                {contactContent.form.buttonText}
+                {data.form.buttonText}
               </button>
             </div>
           </form>

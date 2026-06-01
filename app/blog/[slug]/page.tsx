@@ -1,10 +1,11 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { blogs } from "@/public/datas/blogs";
+import { getBlogs, getBlogBySlug } from "@/src/services/api";
+import { Blog } from "@/src/types";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
@@ -13,11 +14,35 @@ import { motion } from "framer-motion";
 export default function BlogDetailsPage() {
   const params = useParams();
   const slug = params?.slug as string;
-  
-  const blogIndex = blogs.findIndex((b) => b.slug === slug);
-  const blog = blogs[blogIndex];
-  const prevBlog = blogIndex > 0 ? blogs[blogIndex - 1] : null;
-  const nextBlog = blogIndex < blogs.length - 1 ? blogs[blogIndex + 1] : null;
+  const [blog, setBlog] = useState<Blog | null>(null);
+  const [prevBlog, setPrevBlog] = useState<Blog | null>(null);
+  const [nextBlog, setNextBlog] = useState<Blog | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [allBlogs, currentBlog] = await Promise.all([
+          getBlogs(),
+          getBlogBySlug(slug)
+        ]);
+
+        if (currentBlog) {
+          setBlog(currentBlog);
+          const currentIndex = allBlogs.findIndex(b => b.slug === slug);
+          setPrevBlog(currentIndex > 0 ? allBlogs[currentIndex - 1] : null);
+          setNextBlog(currentIndex < allBlogs.length - 1 ? allBlogs[currentIndex + 1] : null);
+        }
+      } catch (error) {
+        console.error("Error fetching blog:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, [slug]);
+
+  if (loading) return null;
 
   if (!blog) {
     return (
@@ -120,7 +145,7 @@ export default function BlogDetailsPage() {
               </h1>
             </div>
 
-            <div className="prose prose-neutral max-w-none">
+            <div className="prose prose-neutral max-w-none text-justify">
               <p className="text-[#202020] text-[16px]  leading-[1.8] mb-8">
                 {blog.description}
               </p>

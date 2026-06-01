@@ -1,18 +1,36 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Search } from "lucide-react";
-import { blogs } from "@/public/datas/blogs";
-import { socialLinks } from "@/public/datas/homepage";
+import { getBlogs, getSocialLinks } from "@/src/services/api";
+import { Blog, SocialLinks } from "@/src/types";
 
 export default function BlogSidebar() {
-  // Use first 3 blogs for popular posts (mockup)
-  const popularPosts = blogs.slice(0, 3);
+  const [popularPosts, setPopularPosts] = useState<Blog[]>([]);
+  const [socialLinks, setSocialLinks] = useState<SocialLinks | null>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [blogs, socials] = await Promise.all([
+          getBlogs(),
+          getSocialLinks()
+        ]);
+        setPopularPosts(blogs.slice(0, 3));
+        setSocialLinks(socials);
+      } catch (error) {
+        console.error("Error fetching sidebar data:", error);
+      }
+    };
+    fetchData();
+  }, []);
   
   // Tags (mockup)
   const tags = ["beauty", "cosmetics", "Claudette", "online", "shop"];
+
+  if (!socialLinks) return null;
 
   return (
     <aside className="space-y-12">
