@@ -116,12 +116,12 @@ export default function Navbar() {
 
       <header className={`fixed left-0 w-full z-50 transition-all duration-300 ${
         isHomePage ? (isScrolled ? "top-0" : "lg:top-[37px] top-0") : "top-0"
-      }`}>
+      } ${isScrolled ? "bg-[#FCF7EE]/90 shadow-sm" : "bg-transparent"}`}>
         <nav
           className={`flex container items-center justify-between transition-all duration-300 ${
             isScrolled 
-              ? "bg-[#FCF7EE]/90 lg:py-2 py-4 shadow-sm" 
-              : `bg-transparent py-6 ${!isScrolled && isHomePage ? "lg:pt-3" : ""}`
+              ? "lg:py-2 py-4" 
+              : `py-6 ${!isScrolled && isHomePage ? "lg:pt-3" : ""}`
           }`}
         >
       
